@@ -55,21 +55,8 @@ public class LibInfoActivity extends Activity {
 
         if (num == 0)
             mWebView.loadUrl("http://m.donga.ac.kr");
-
-        else if (num == 1) // 4층
-            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=1"); // 웹뷰
-            // 주소
-        else if (num == 2) // 5층 A
-            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=2"); // 웹뷰
-            // 주소
-        else if (num == 3) // 5층 B
-            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=3"); // 웹뷰
-            // 주소
-        else if (num == 4) // 5층 C
-            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=4"); // 웹뷰
-
-        else if (num == 5) // 5층 D
-            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=5"); // 웹뷰
+        else
+            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no="+num);
     }
 
     @Override
