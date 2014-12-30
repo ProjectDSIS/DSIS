@@ -12,71 +12,71 @@ import android.widget.ProgressBar;
 
 public class LibInfoActivity extends Activity {
 
-	Intent itt;
-	int num = 0;
-	
-	WebView mWebView;
-	WebSettings Wset;	
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.libinfo);
-		
-		itt = getIntent();
-		num = itt.getIntExtra("code", 0);
-		
-		//xml¿¡ ¼±¾ğÇÑ ÇÁ·Î±×·¡½º¹Ù¸¦ »ı¼ºÇÑ´Ù. id´Â xmlÀ» Âü°í
-		final ProgressBar mProgCircle = (ProgressBar)findViewById(R.id.bar);
-		
-		mWebView = (WebView)findViewById(R.id.wv_libinfo); // À¥ºä¿Í xml °£ ¿¬µ¿
-		mWebView.setWebViewClient(new WebViewClient());
-		Wset = mWebView.getSettings();
-		Wset.setJavaScriptEnabled(true); // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë		
-		
-		Wset.setSupportZoom(true);
-		Wset.setBuiltInZoomControls(true);
-		
-		mWebView.setInitialScale(0);//default,no zoom
-		
-		//loadUrl ¿Ï·á±îÁö ÇÁ·Î±×·¡½º¹Ù¸¦ º¸ÀÌ°Ô ¼³Á¤
-		mProgCircle.setVisibility(View.VISIBLE);
-		
-		mWebView.setWebViewClient(new WebViewClient() {
-			  @Override
-			  public void onPageFinished(WebView view,String url)
-			  {   				  
-			     if(mProgCircle.getVisibility() ==  View.VISIBLE){
-			       mProgCircle.setVisibility(View.INVISIBLE);
-			       
-			     }		
-			  } 
-			});		
+    Intent itt;
+    int num = 0;
 
-		if (num == 0)
-			mWebView.loadUrl("http://m.donga.ac.kr");
+    WebView mWebView;
+    WebSettings Wset;
 
-		else if (num == 1) // 4Ãş
-			mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=1"); // À¥ºä
-																							// ÁÖ¼Ò
-		else if (num == 2) // 5Ãş A
-			mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=2"); // À¥ºä
-																							// ÁÖ¼Ò
-		else if (num == 3) // 5Ãş B
-			mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=3"); // À¥ºä
-																						// ÁÖ¼Ò
-		else if (num == 4) // 5Ãş C
-			mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=4"); // À¥ºä
-		
-		else if (num == 5) // 5Ãş D
-			mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=5"); // À¥ºä
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.libinfo);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.lib_info, menu);
-		return true;
-	}
+        itt = getIntent();
+        num = itt.getIntExtra("code", 0);
+
+        //xmlì— ì„ ì–¸í•œ í”„ë¡œê·¸ë˜ìŠ¤ë°”ë¥¼ ìƒì„±í•œë‹¤. idëŠ” xmlì„ ì°¸ê³ 
+        final ProgressBar mProgCircle = (ProgressBar)findViewById(R.id.bar);
+
+        mWebView = (WebView)findViewById(R.id.wv_libinfo); // ì›¹ë·°ì™€ xml ê°„ ì—°ë™
+        mWebView.setWebViewClient(new WebViewClient());
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true); // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
+
+        Wset.setSupportZoom(true);
+        Wset.setBuiltInZoomControls(true);
+
+        mWebView.setInitialScale(0);//default,no zoom
+
+        //loadUrl ì™„ë£Œê¹Œì§€ í”„ë¡œê·¸ë˜ìŠ¤ë°”ë¥¼ ë³´ì´ê²Œ ì„¤ì •
+        mProgCircle.setVisibility(View.VISIBLE);
+
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view,String url)
+            {
+                if(mProgCircle.getVisibility() ==  View.VISIBLE){
+                    mProgCircle.setVisibility(View.INVISIBLE);
+
+                }
+            }
+        });
+
+        if (num == 0)
+            mWebView.loadUrl("http://m.donga.ac.kr");
+
+        else if (num == 1) // 4ì¸µ
+            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=1"); // ì›¹ë·°
+            // ì£¼ì†Œ
+        else if (num == 2) // 5ì¸µ A
+            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=2"); // ì›¹ë·°
+            // ì£¼ì†Œ
+        else if (num == 3) // 5ì¸µ B
+            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=3"); // ì›¹ë·°
+            // ì£¼ì†Œ
+        else if (num == 4) // 5ì¸µ C
+            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=4"); // ì›¹ë·°
+
+        else if (num == 5) // 5ì¸µ D
+            mWebView.loadUrl("http://168.115.76.58/seat/roomview5.asp?room_no=5"); // ì›¹ë·°
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.lib_info, menu);
+        return true;
+    }
 
 }

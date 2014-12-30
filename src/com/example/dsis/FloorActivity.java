@@ -8,104 +8,78 @@ import android.view.View;
 
 public class FloorActivity extends Activity {
 
-	Intent itt;
-	int num = 0;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.floor);
-		
-		//itt = getIntent();
-		//num = itt.getIntExtra("code", 0);
-		
-		itt = new Intent();
-	}
+    Intent itt;
+    int num = 0;
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.floor, menu);
-		return true;
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.floor);
 
-	public void ck_b1(View v) // ÁöÇÏ 1Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 10);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f1(View v) // 1Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 1);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f2(View v) // 2Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 2);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f3(View v) // 3Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 3);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f4(View v) // 4Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 4);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f5(View v) // 5Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 5);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f6(View v) // 6Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 6);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f7(View v) // 7Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 7);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f8(View v) // 8Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 8);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
-	
-	public void ck_f9(View v) // 9Ãþ
-	{
-		itt.setClass(FloorActivity.this, SFMajorActivity.class);
-		itt.putExtra("code", 9);
-		startActivityForResult(itt, 0);
-		// startActivity(itt);
-	}
+        itt = new Intent();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.floor, menu);
+        return true;
+    }
+
+    private void showActivity(int _floor)
+    {
+        itt.setClass(FloorActivity.this, SFMajorActivity.class);
+        itt.putExtra("code", _floor);
+        startActivityForResult(itt, 0);
+    }
+
+    public void ck_b1(View v) // ì§€í•˜ 1ì¸µ
+    {
+        showActivity(10);
+    }
+
+    public void ck_f1(View v) // 1ì¸µ
+    {
+        showActivity(1);
+    }
+
+    public void ck_f2(View v) // 2ì¸µ
+    {
+        showActivity(2);
+    }
+
+    public void ck_f3(View v) // 3ì¸µ
+    {
+        showActivity(3);
+    }
+
+    public void ck_f4(View v) // 4ì¸µ
+    {
+        showActivity(4);
+    }
+
+    public void ck_f5(View v) // 5ì¸µ
+    {
+        showActivity(5);
+    }
+
+    public void ck_f6(View v) // 6ì¸µ
+    {
+        showActivity(6);
+    }
+
+    public void ck_f7(View v) // 7ì¸µ
+    {
+        showActivity(7);
+    }
+
+    public void ck_f8(View v) // 8ì¸µ
+    {
+        showActivity(8);
+    }
+
+    public void ck_f9(View v) // 9ì¸µ
+    {
+        showActivity(9);
+    }
 }

@@ -13,119 +13,119 @@ import android.widget.Toast;
 
 public class SFMajorActivity extends Activity {
 
-	Intent itt;
-	int num;
-	int deviceWidth;
-	int deviceHeight;
-	ImageView imgview;
-	int check = 0;
-	
-	 // ÅÍÄ¡ µÈ xÁÂÇ¥
+    Intent itt;
+    int num;
+    int deviceWidth;
+    int deviceHeight;
+    ImageView imgview;
+    int check = 0;
+
+    // í„°ì¹˜ ëœ xì¢Œí‘œ
     float x1=0 , x2=0;
-    // ÅÍÄ¡ µÈ yÁÂÇ¥
+    // í„°ì¹˜ ëœ yì¢Œí‘œ
     float y1=0 , y2=0;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sfmajor);
-		
-		itt = getIntent();
-		num = itt.getIntExtra("code", 0);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sfmajor);
 
-		DisplayMetrics displayMetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-		deviceWidth = displayMetrics.widthPixels;
-		deviceHeight = displayMetrics.heightPixels;
-		// ²À ³Ö¾î ÁÖ¾î¾ß ÇÑ´Ù. ÀÌ·¸°Ô ÇØ¾ß displayMetrics°¡ ¼¼ÆÃÀÌ µÈ´Ù.
-		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-		imgview = (ImageView) findViewById(R.id.sfmap); // xml ÀÌ¹ÌÁö°¡
-																	// µé¾î°¥ ÀÌ¹ÌÁöºä¸¦
-																	// °¡Á®¿Â´Ù.
-		draw();
-		
-		Toast.makeText(this, " ÁÂ¿ì ÅÍÄ¡¸¦ ÅëÇØ Ãş °£ ÀÌµ¿ °¡´É  :- ) ",
-				Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-	}
+        itt = getIntent();
+        num = itt.getIntExtra("code", 0);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.sfmajor, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		 // ÇöÀçÀÇ ÅÍÄ¡ ¾×¼ÇÀÇ Á¾·ù¸¦ ¹Ş¾Æ¿Â´Ù.
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        deviceWidth = displayMetrics.widthPixels;
+        deviceHeight = displayMetrics.heightPixels;
+        // ê¼­ ë„£ì–´ ì£¼ì–´ì•¼ í•œë‹¤. ì´ë ‡ê²Œ í•´ì•¼ displayMetricsê°€ ì„¸íŒ…ì´ ëœë‹¤.
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        imgview = (ImageView) findViewById(R.id.sfmap); // xml ì´ë¯¸ì§€ê°€
+        // ë“¤ì–´ê°ˆ ì´ë¯¸ì§€ë·°ë¥¼
+        // ê°€ì ¸ì˜¨ë‹¤.
+        draw();
+
+        Toast.makeText(this, " ì¢Œìš° í„°ì¹˜ë¥¼ í†µí•´ ì¸µ ê°„ ì´ë™ ê°€ëŠ¥  :- ) ",
+                Toast.LENGTH_SHORT).show(); // Toast ê°ì²´ ìƒì„± í›„ , " "ë¬¸êµ¬ë¥¼ ì¶œë ¥ show
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sfmajor, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // í˜„ì¬ì˜ í„°ì¹˜ ì•¡ì…˜ì˜ ì¢…ë¥˜ë¥¼ ë°›ì•„ì˜¨ë‹¤.
         int action = event.getAction();
-       
-        // ¾×¼ÇÀÇ Á¾·ù¿¡ µû¸¥ ¿ªÇÒ ¼öÇà
+
+        // ì•¡ì…˜ì˜ ì¢…ë¥˜ì— ë”°ë¥¸ ì—­í•  ìˆ˜í–‰
         switch (action) {
-        // µå·¡±× µÇ¾úÀ» ¶§ÀÇ ÀÌº¥Æ® Ã³¸®
-        case MotionEvent.ACTION_DOWN :
-        	x1 = event.getX();
-        	y1 = event.getX();
-            break;
-            
-        case MotionEvent.ACTION_UP :
-        	x2 = event.getX();
-        	y2 = event.getX();
-        	
-        	
-        	if(x1 < x2)
-            {
-            	if(num>1 && num!=10)
-            	{
-            		num--;
-            	}
-            	else if(num==1)
-            	{
-            		num = 10;
-            	}
-            	
-            	draw();
-            }
-            else if(x2 < x1)
-            {
-            	if(num<9)
-            	{
-            		num++;
-            	}
-            	else if(num == 10)
-            		num = 1;
-            	
-            	draw();
-            }
-        	
-        	break;
-        	
-        }        
+            // ë“œë˜ê·¸ ë˜ì—ˆì„ ë•Œì˜ ì´ë²¤íŠ¸ ì²˜ë¦¬
+            case MotionEvent.ACTION_DOWN :
+                x1 = event.getX();
+                y1 = event.getX();
+                break;
+
+            case MotionEvent.ACTION_UP :
+                x2 = event.getX();
+                y2 = event.getX();
+
+
+                if(x1 < x2)
+                {
+                    if(num>1 && num!=10)
+                    {
+                        num--;
+                    }
+                    else if(num==1)
+                    {
+                        num = 10;
+                    }
+
+                    draw();
+                }
+                else if(x2 < x1)
+                {
+                    if(num<9)
+                    {
+                        num++;
+                    }
+                    else if(num == 10)
+                        num = 1;
+
+                    draw();
+                }
+
+                break;
+
+        }
 
         return true;
-   	}
+    }
 
-	void draw()
-	{
-		if (num != 0 && num != 10) {
-			
-			int temp = num-1;
-			
-			Bitmap bmp = BitmapFactory.decodeResource(getResources(),
-					R.drawable.sf1+temp); // ºñÆ®¸Ê ÀÌ¹ÌÁö¸¦ ¸¸µç´Ù.
-			Bitmap resizedbitmap = Bitmap.createScaledBitmap(bmp, deviceWidth,
-					deviceHeight, true); // ÀÌ¹ÌÁö »çÀÌÁî Á¶Á¤
-			imgview.setImageBitmap(resizedbitmap); // ÀÌ¹ÌÁöºä¿¡ Á¶Á¤ÇÑ ÀÌ¹ÌÁö ³Ö±â
-		}
-		else if(num == 10)
-		{
-			Bitmap bmp = BitmapFactory.decodeResource(getResources(),
-					R.drawable.sfb1); // ºñÆ®¸Ê ÀÌ¹ÌÁö¸¦ ¸¸µç´Ù.
-			Bitmap resizedbitmap = Bitmap.createScaledBitmap(bmp, deviceWidth,
-					deviceHeight, true); // ÀÌ¹ÌÁö »çÀÌÁî Á¶Á¤
-			imgview.setImageBitmap(resizedbitmap); // ÀÌ¹ÌÁöºä¿¡ Á¶Á¤ÇÑ ÀÌ¹ÌÁö ³Ö±â
-		}	
-	}
+    void draw()
+    {
+        if (num != 0 && num != 10) {
+
+            int temp = num-1;
+
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.sf1+temp); // ë¹„íŠ¸ë§µ ì´ë¯¸ì§€ë¥¼ ë§Œë“ ë‹¤.
+            Bitmap resizedbitmap = Bitmap.createScaledBitmap(bmp, deviceWidth,
+                    deviceHeight, true); // ì´ë¯¸ì§€ ì‚¬ì´ì¦ˆ ì¡°ì •
+            imgview.setImageBitmap(resizedbitmap); // ì´ë¯¸ì§€ë·°ì— ì¡°ì •í•œ ì´ë¯¸ì§€ ë„£ê¸°
+        }
+        else if(num == 10)
+        {
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.sfb1); // ë¹„íŠ¸ë§µ ì´ë¯¸ì§€ë¥¼ ë§Œë“ ë‹¤.
+            Bitmap resizedbitmap = Bitmap.createScaledBitmap(bmp, deviceWidth,
+                    deviceHeight, true); // ì´ë¯¸ì§€ ì‚¬ì´ì¦ˆ ì¡°ì •
+            imgview.setImageBitmap(resizedbitmap); // ì´ë¯¸ì§€ë·°ì— ì¡°ì •í•œ ì´ë¯¸ì§€ ë„£ê¸°
+        }
+    }
 }
 
 

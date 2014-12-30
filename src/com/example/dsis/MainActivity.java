@@ -16,196 +16,140 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	Intent itt;
+    Intent itt;
 
-	boolean sw = true;
-	
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		WebView mWebView = (WebView) findViewById(R.id.counting);
-		WebSettings Wset;
-		mWebView.setWebViewClient(new WebViewClient());
-		
-		Wset = mWebView.getSettings();		
-		Wset.setJavaScriptEnabled(true);	 // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
-		mWebView.loadUrl("http://sjhan2343.cafe24.com/counter/counter.php");  
+    boolean sw = true;
 
-		Toast.makeText(this, " \'µğ½ºÀÌÁî\'´Â µ¥ÀÌÅÍ Åë½ÅÀ» »ç¿ëÇÔ  :- ) ",
-				Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
 
-		itt = new Intent();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+        WebView mWebView = (WebView) findViewById(R.id.counting);
+        WebSettings Wset;
+        mWebView.setWebViewClient(new WebViewClient());
 
-	public void ck_notice(View v) // °øÁö»çÇ×
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, MdongaActivity.class);
-			itt.putExtra("code", 1);
-			startActivityForResult(itt, 0);
-			// startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true);	 // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
+        mWebView.loadUrl("http://sjhan2343.cafe24.com/counter/counter.php");
 
-	public void ck_study(View v) // ÇĞ»ç°øÁö
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, MdongaActivity.class);
-			itt.putExtra("code", 2);
-			startActivityForResult(itt, 0);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+        Toast.makeText(this, " \'ë””ìŠ¤ì´ì¦ˆ\'ëŠ” ë°ì´í„° í†µì‹ ì„ ì‚¬ìš©í•¨  :- ) ",
+                Toast.LENGTH_SHORT).show(); // Toast ê°ì²´ ìƒì„± í›„ , " "ë¬¸êµ¬ë¥¼ ì¶œë ¥ show
 
-	public void ck_eat(View v) // ÇĞ±³½Ä´ç
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, MdongaActivity.class);
-			itt.putExtra("code", 3);
-			startActivityForResult(itt, 0);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+        itt = new Intent();
+    }
 
-	public void ck_free(View v) // ÀÚÀ¯°Ô½ÃÆÇ
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, MdongaActivity.class);
-			itt.putExtra("code", 4);
-			startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	public void ck_lib(View v) // µµ¼­°ü
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, LibActivity.class);
-			startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+    public void ck_notice(View v) // ê³µì§€ì‚¬í•­
+    {
+        showActivity(ConstTable.BOARD.NOTICE, MdongaActivity.class);
+    }
 
-	public void ck_dsis(View v) // µğ½ºÀÌÁî
-	{
-		if(sw == false)
-		{
-			itt.setClass(MainActivity.this, LogMainActivity.class);
-			startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+    public void ck_study(View v) // í•™ì‚¬ê³µì§€
+    {
+        showActivity(ConstTable.BOARD.BACHELOR_NOTICE, MdongaActivity.class);
+    }
 
-	public void ck_service(View v) // ¹è´ŞÁ¤º¸
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, BaeDalActivity.class);
-			startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+    public void ck_eat(View v) // í•™êµì‹ë‹¹
+    {
+        showActivity(ConstTable.BOARD.RESTAURANT, MdongaActivity.class);
+    }
 
-	public void ck_map(View v) // Áöµµ
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, MapActivity.class);
-			startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+    public void ck_free(View v) // ììœ ê²Œì‹œíŒ
+    {
+        showActivity(ConstTable.BOARD.FREE_BOARD, MdongaActivity.class);
+    }
 
-	public void ck_dt(View v) // °³¹ßÆÀ
-	{
-		if(sw == true)
-		{
-			itt.setClass(MainActivity.this, DeveloperActivity.class);
-			startActivity(itt);
-		}
-		else
-		{
-			Toast.makeText(this, " ÇØ´ç ¹öÀü¿¡¼­´Â Á¦ÇÑµÈ ±â´ÉÀÔ´Ï´Ù :- )", Toast.LENGTH_SHORT).show(); // Toast °´Ã¼ »ı¼º ÈÄ , " "¹®±¸¸¦ Ãâ·Â show
-		}
-	}
+    public void ck_lib(View v) // ë„ì„œê´€
+    {
+        showActivity(ConstTable.BOARD.NOT_BOARD, LibActivity.class);
+    }
 
-	/* Back key µÎ¹ø´­·¯ Á¾·á ÄÚµå ½ÃÀÛ */
-	private static final int MSG_TIMER_EXPIRED = 1;
-	private static final int BACKEY_TIMEOUT = 2000;
-	private boolean mIsBackKeyPressed = false;
-	private long mCurrentTimeInMillis = 0;
+    public void ck_dsis(View v) // ë””ìŠ¤ì´ì¦ˆ
+    {
+        showActivity(ConstTable.BOARD.NOT_BOARD, LogMainActivity.class);
+    }
 
-	@Override
-	public void onBackPressed() {
+    public void ck_service(View v) // ë°°ë‹¬ì •ë³´
+    {
+        showActivity(ConstTable.BOARD.NOT_BOARD, BaeDalActivity.class);
+    }
 
-		if (mIsBackKeyPressed == false) {
-			mIsBackKeyPressed = true;
-			mCurrentTimeInMillis = Calendar.getInstance().getTimeInMillis();
-			Toast.makeText(this, "\'µÚ·Î\' ¹öÆ°À» ÇÑ¹ø ´õ ´©¸£¸é Á¾·áµÊ :- (",
-					Toast.LENGTH_SHORT).show();
-			startTimer();
-		} else {
-			mIsBackKeyPressed = false;
+    public void ck_map(View v) // ì§€ë„
+    {
+        showActivity(ConstTable.BOARD.NOT_BOARD, MapActivity.class);
+    }
 
-			if (Calendar.getInstance().getTimeInMillis() <= (mCurrentTimeInMillis + (BACKEY_TIMEOUT))) {
-				finish();
-			}
-		}
-	}
+    public void ck_dt(View v) // ê°œë°œíŒ€
+    {
+        showActivity(ConstTable.BOARD.NOT_BOARD, DeveloperActivity.class);
+    }
 
-	private void startTimer() {
-		mTimerHander.sendEmptyMessageDelayed(MSG_TIMER_EXPIRED, BACKEY_TIMEOUT);
-	}
+    //ì•¡í‹°ë¹„í‹° í˜¸ì¶œ í•¨ìˆ˜
+    private void showActivity(int _code, Class<?> _cls)
+    {
+        if(sw)
+        {
+            itt.setClass(MainActivity.this, _cls.getClass());
 
-	private Handler mTimerHander = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case MSG_TIMER_EXPIRED: {
-				mIsBackKeyPressed = false;
-			}
-				break;
-			}
-		}
-	};
-	/* Back key µÎ¹ø´­·¯ Á¾·á ÄÚµå ³¡ */
+            if(_code != ConstTable.BOARD.NOT_BOARD)
+                itt.putExtra("code", _code);
+
+            if(_code > ConstTable.BOARD.FREE_BOARD)
+                startActivity(itt);
+            else
+                startActivityForResult(itt, 0);
+        }
+        else
+        {
+            // Toast ê°ì²´ ìƒì„± í›„ , " "ë¬¸êµ¬ë¥¼ ì¶œë ¥ show
+            Toast.makeText(this, " í•´ë‹¹ ë²„ì „ì—ì„œëŠ” ì œí•œëœ ê¸°ëŠ¥ì…ë‹ˆë‹¤ :- )", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /* Back key ë‘ë²ˆëˆŒëŸ¬ ì¢…ë£Œ ì½”ë“œ ì‹œì‘ */
+    private static final int MSG_TIMER_EXPIRED = 1;
+    private static final int BACKEY_TIMEOUT = 2000;
+    private boolean mIsBackKeyPressed = false;
+    private long mCurrentTimeInMillis = 0;
+
+    @Override
+    public void onBackPressed() {
+        if (mIsBackKeyPressed == false) {
+            mIsBackKeyPressed = true;
+            mCurrentTimeInMillis = Calendar.getInstance().getTimeInMillis();
+            Toast.makeText(this, "\'ë’¤ë¡œ\' ë²„íŠ¼ì„ í•œë²ˆ ë” ëˆ„ë¥´ë©´ ì¢…ë£Œë¨ :- (",
+                    Toast.LENGTH_SHORT).show();
+            startTimer();
+        } else {
+            mIsBackKeyPressed = false;
+
+            if (Calendar.getInstance().getTimeInMillis() <= (mCurrentTimeInMillis + (BACKEY_TIMEOUT))) {
+                finish();
+            }
+        }
+    }
+
+    private void startTimer() {
+        mTimerHander.sendEmptyMessageDelayed(MSG_TIMER_EXPIRED, BACKEY_TIMEOUT);
+    }
+
+    private Handler mTimerHander = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_TIMER_EXPIRED: {
+                    mIsBackKeyPressed = false;
+                }
+                break;
+            }
+        }
+    };
+	/* Back key ë‘ë²ˆëˆŒëŸ¬ ì¢…ë£Œ ì½”ë“œ ë */
 }

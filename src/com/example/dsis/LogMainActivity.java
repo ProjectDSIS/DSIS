@@ -16,161 +16,161 @@ import android.webkit.WebViewClient;
 
 public class LogMainActivity extends Activity {
 
-	WebView mWebView;
-	WebSettings Wset;
-	Intent itt;
-	String chs = "https://student.donga.ac.kr/Main.aspx";
-	int flag = 0;
-	boolean check = true;
-	int deviceWidth;
-	int deviceHeight;
-	int checkZoom = 0;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.logmain);
-		
-		//µğ¹ÙÀÌ½º ÇØ»óµµ ¸®ÅÏ
-		DisplayMetrics displayMetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-		deviceWidth = displayMetrics.widthPixels;
-		deviceHeight =displayMetrics.heightPixels;
-		
-		mWebView = (WebView)findViewById(R.id.wv_login);	// À¥ºä¿Í xml °£ ¿¬µ¿
-		mWebView.setWebViewClient(new WebViewClient());
-		
-		Wset = mWebView.getSettings();		
-		Wset.setJavaScriptEnabled(true);	 // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
-		
-		itt = new Intent();
-		
-		mWebView.setHorizontalScrollBarEnabled(false); //°¡·Î ½ºÅ©·Ñ  
-		mWebView.setVerticalScrollBarEnabled(false);
-		
-		mMainHandler = new SendMassgeHandler();
-		mCountThread = new CountThread();
-				
-		mWebView.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onReceivedSslError(WebView view,
-					SslErrorHandler handler, SslError error) {
-				handler.proceed(); // SSL ¿¡·¯°¡ ¹ß»ıÇØµµ °è¼Ó ÁøÇà!
-			}
-			
-			@Override
-			public void onPageFinished(WebView view, String url) {	// ÆäÀÌÁö ·Îµå ¿Ï·á ÈÄ 
-				if(checkZoom == 0)
-				{
-					mWebView.zoomIn();
-					checkZoom = 1;
-				}
-			}			
-		});
-		
-		mWebView.loadUrl("https://student.donga.ac.kr/Login.aspx");
-		mCountThread.start();
-		
-		Log.e("¸ŞÀÎ","ÇÇ´Ï½¬");
-	}
+    WebView mWebView;
+    WebSettings Wset;
+    Intent itt;
+    String chs = "https://student.donga.ac.kr/Main.aspx";
+    int flag = 0;
+    boolean check = true;
+    int deviceWidth;
+    int deviceHeight;
+    int checkZoom = 0;
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.log_main, menu);
-		return true;
-	}
-	
-	private SendMassgeHandler mMainHandler = null;
-	private CountThread mCountThread = null;
-	
-	// Handler Å¬·¡½º
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.logmain);
+
+        //ë””ë°”ì´ìŠ¤ í•´ìƒë„ ë¦¬í„´
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        deviceWidth = displayMetrics.widthPixels;
+        deviceHeight =displayMetrics.heightPixels;
+
+        mWebView = (WebView)findViewById(R.id.wv_login);	// ì›¹ë·°ì™€ xml ê°„ ì—°ë™
+        mWebView.setWebViewClient(new WebViewClient());
+
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true);	 // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
+
+        itt = new Intent();
+
+        mWebView.setHorizontalScrollBarEnabled(false); //ê°€ë¡œ ìŠ¤í¬ë¡¤
+        mWebView.setVerticalScrollBarEnabled(false);
+
+        mMainHandler = new SendMassgeHandler();
+        mCountThread = new CountThread();
+
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view,
+                                           SslErrorHandler handler, SslError error) {
+                handler.proceed(); // SSL ì—ëŸ¬ê°€ ë°œìƒí•´ë„ ê³„ì† ì§„í–‰!
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {	// í˜ì´ì§€ ë¡œë“œ ì™„ë£Œ í›„
+                if(checkZoom == 0)
+                {
+                    mWebView.zoomIn();
+                    checkZoom = 1;
+                }
+            }
+        });
+
+        mWebView.loadUrl("https://student.donga.ac.kr/Login.aspx");
+        mCountThread.start();
+
+        Log.e("ë©”ì¸","í”¼ë‹ˆì‰¬");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.log_main, menu);
+        return true;
+    }
+
+    private SendMassgeHandler mMainHandler = null;
+    private CountThread mCountThread = null;
+
+    // Handler í´ë˜ìŠ¤
     class SendMassgeHandler extends Handler {
-         
+
         @Override
         public void handleMessage(Message msg) {
-                   	
+
             if(msg.what == 0)
-            {               	
-            	mWebView.setOnTouchListener(new View.OnTouchListener() {	// ÅÍÄ¡ ¸®½º³Ê·Î ¹«ºù ÅÍÄ¡ ¹ß»ı ½Ã ½ºÅ©·Ñ ¾ø°Ô
-					
-				    public boolean onTouch(View v, MotionEvent event) {
-				      return (event.getAction() == MotionEvent.ACTION_MOVE);
-				    }
-				  });
-            	
-            	if(deviceHeight == 2560 && deviceWidth == 1440)
-             		mWebView.scrollTo(380,1265); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 2560*1440
-            	
-            	else if(deviceHeight == 2392 && deviceWidth == 1440)
-             		mWebView.scrollTo(380,1250); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 2392*1440
-            	
-            	else if(deviceHeight == 1920 && deviceWidth == 1080)
-            		mWebView.scrollTo(285,950); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1920*1080 2.02 3.78
-            	
-            	else if(deviceHeight == 1776 && deviceWidth == 1080)
-            		mWebView.scrollTo(285,950); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1776*1080 G2
-            	
-            	else if(deviceHeight == 1280 && deviceWidth == 768)
-            		mWebView.scrollTo(175,635); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1280*768
-            	
-            	else if(deviceHeight == 1280 && deviceWidth == 720)
-            		mWebView.scrollTo(195,635); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1280*720
-            	
-            	else if(deviceHeight == 1184 && deviceWidth == 720)
-            		mWebView.scrollTo(195,600); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1184*720  º£°¡R3
-            	
-            	
-            	if(chs.equals(mWebView.getUrl()))
-            	{
-            		mWebView.loadUrl("about:blank");
-            		Log.e("·Î±×ÀÎ", "¼º°ø!");
-            		flag = 1;
-            	}
-            }   
+            {
+                mWebView.setOnTouchListener(new View.OnTouchListener() {	// í„°ì¹˜ ë¦¬ìŠ¤ë„ˆë¡œ ë¬´ë¹™ í„°ì¹˜ ë°œìƒ ì‹œ ìŠ¤í¬ë¡¤ ì—†ê²Œ
+
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return (event.getAction() == MotionEvent.ACTION_MOVE);
+                    }
+                });
+
+                if(deviceHeight == 2560 && deviceWidth == 1440)
+                    mWebView.scrollTo(380,1265); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 2560*1440
+
+                else if(deviceHeight == 2392 && deviceWidth == 1440)
+                    mWebView.scrollTo(380,1250); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 2392*1440
+
+                else if(deviceHeight == 1920 && deviceWidth == 1080)
+                    mWebView.scrollTo(285,950); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1920*1080 2.02 3.78
+
+                else if(deviceHeight == 1776 && deviceWidth == 1080)
+                    mWebView.scrollTo(285,950); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1776*1080 G2
+
+                else if(deviceHeight == 1280 && deviceWidth == 768)
+                    mWebView.scrollTo(175,635); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1280*768
+
+                else if(deviceHeight == 1280 && deviceWidth == 720)
+                    mWebView.scrollTo(195,635); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1280*720
+
+                else if(deviceHeight == 1184 && deviceWidth == 720)
+                    mWebView.scrollTo(195,600); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1184*720  ë² ê°€R3
+
+
+                if(chs.equals(mWebView.getUrl()))
+                {
+                    mWebView.loadUrl("about:blank");
+                    Log.e("ë¡œê·¸ì¸", "ì„±ê³µ!");
+                    flag = 1;
+                }
+            }
             super.handleMessage(msg);
         }
     };
-     
-    // Thread Å¬·¡½º
+
+    // Thread í´ë˜ìŠ¤
     class CountThread extends Thread implements Runnable {
-         
+
         @Override
         public void run() {
             super.run();
-            
+
             while (check) {
-            	
-            	try{
-            		
-            		if(flag == 0)
-            		{            	
-            			// ¸Ş½ÃÁö ¾ò¾î¿À±â
-            			Message msg = mMainHandler.obtainMessage();
-                      
-            			// ¸Ş½ÃÁö ID ¼³Á¤
-            			msg.what = 0;
-                 
-            			Log.e("sub ½º·¹µå", "¼º°ø!");
-            			mMainHandler.sendMessage(msg);
-            		}
-            	
-            		else if(flag == 1)
-					{
-						Log.e("È­¸éÀüÈ¯", "¼º°ø");
-						itt.setClass(LogMainActivity.this, ThisIsActivity.class);
-						startActivity(itt);
-						check = false;				
-						
-						finish();
-					}
-            		
-            		Thread.sleep(300);
-            	}
-            	catch(Exception e)
-            	{
-            		Log.e("¾²·¹µå", "·Î±×ÀÎ Ã¼Å· ½ÇÆĞ");
-            	}
+
+                try{
+
+                    if(flag == 0)
+                    {
+                        // ë©”ì‹œì§€ ì–»ì–´ì˜¤ê¸°
+                        Message msg = mMainHandler.obtainMessage();
+
+                        // ë©”ì‹œì§€ ID ì„¤ì •
+                        msg.what = 0;
+
+                        Log.e("sub ìŠ¤ë ˆë“œ", "ì„±ê³µ!");
+                        mMainHandler.sendMessage(msg);
+                    }
+
+                    else if(flag == 1)
+                    {
+                        Log.e("í™”ë©´ì „í™˜", "ì„±ê³µ");
+                        itt.setClass(LogMainActivity.this, ThisIsActivity.class);
+                        startActivity(itt);
+                        check = false;
+
+                        finish();
+                    }
+
+                    Thread.sleep(300);
+                }
+                catch(Exception e)
+                {
+                    Log.e("ì“°ë ˆë“œ", "ë¡œê·¸ì¸ ì²´í‚¹ ì‹¤íŒ¨");
+                }
             }
         }
     }

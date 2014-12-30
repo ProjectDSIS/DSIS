@@ -39,552 +39,552 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class Logmark extends Activity {
-	WebView mWebView;
-	WebSettings Wset;
-	TextView student2;
-	TextView student1;
-	ListView listView;
-	
-	ArrayList<customView> data_list;
-	CustomAdapter customAdapter;
-	customView temp;
-	Context context;
-	
-	String selectedItem;
-	String selectedyear;
-	public int num=1;
-	int sel=0;
-	
-	String text;
-	String name;
-	int ok=0;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.log_mark);
-		
-		mWebView = (WebView) findViewById(R.id.web); // À¥ºä¿Í xml °£ ¿¬µ¿
-		mWebView.setWebViewClient(new WebViewClient());
-		Log.d("web","view1");
-		
-		Wset = mWebView.getSettings();
-		Wset.setJavaScriptEnabled(true); // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
-		mWebView.setHorizontalScrollBarEnabled(false); //°¡·Î ½ºÅ©·Ñ  
-		mWebView.setVerticalScrollBarEnabled(false);
-		//edit = (TextView) findViewById(R.id.grade);
-		
-		student2 = (TextView)findViewById(R.id.student2);
-		student1 = (TextView)findViewById(R.id.student1);
-		listView = (ListView)findViewById(R.id.listView);
-		
-		text = new String();
-		
-		context = this;
-		
-		ArrayList array1= new ArrayList<String>();
-		ArrayList array2= new ArrayList<String>();
-		
-		data_list = new ArrayList<customView>();
-		
-		array1.add("1ÇĞ±â");						//10
-		array1.add("°èÀıÇĞ±â(ÇÏ°è)");				//11
-		array1.add("2ÇĞ±â");						//20
-		array1.add("°èÀıÇĞ±â(µ¿°è)");				//21
+    WebView mWebView;
+    WebSettings Wset;
+    TextView student2;
+    TextView student1;
+    ListView listView;
 
-		selectedItem = new String();
-		selectedyear = new String();
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>
-							(this,android.R.layout.simple_spinner_dropdown_item,array1);
-		Spinner sp = (Spinner)findViewById(R.id.spinner2);
-		sp.setPrompt("ÇĞ±â¸¦ ¼±ÅÃÇÏ¼¼¿ä");
-		sp.setAdapter(adapter);
-		
-		sp.setOnItemSelectedListener(new OnItemSelectedListener() {		// ÇĞ±â
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
-				/*
-				* ½ºÇÇ³Ê ¼±ÅÃ ¸®½º³Ê
-				*/
-				// ¼±ÅÃÇÑ ¾ÆÀÌÅÛ 
-				selectedItem=parent.getItemAtPosition(position).toString();
-				sel = parent.getSelectedItemPosition();
-				
-				switch(sel){
-				case 0:
-					sel=10;
-					break;
-				case 1:
-					sel=11;
-					break;
-				case 2:
-					sel=20;
-					break;
-				case 3:
-					sel=21;
-					break;
-				}
-				
-				Log.d("ÆÄ½Ì ÇßÀ½", Integer.toString(sel) );
-			}
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {	
-				/*
-				* ½ºÇÇ³Ê ¼±ÅÃ ¾ÈÇßÀ» ¶§ ¸®½º³Ê
-				*/
-				// TODO Auto-generated method stub
-			}
-		});
-		
-		Calendar cal=Calendar.getInstance();
-		int year = Integer.parseInt(cal.getTime().toString().substring(30));
-		
-		for(int a=0; a<20; a++){
-			array2.add(Integer.toString(year));
-			year--;
-		}
-		
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>
-								(this,android.R.layout.simple_spinner_dropdown_item,array2);
-		Spinner sp2 = (Spinner)findViewById(R.id.spinner1);
-		sp2.setPrompt("ÇĞ³âµµ¸¦ ¼±ÅÃÇÏ¼¼¿ä");
-		sp2.setAdapter(adapter1);
-		sp2.setOnItemSelectedListener(new OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-						int position, long id) {
-				/*
-				* ½ºÇÇ³Ê ¼±ÅÃ ¸®½º³Ê
-				*/
-				// ¼±ÅÃÇÑ ¾ÆÀÌÅÛ 
-				selectedyear=parent.getItemAtPosition(position).toString();
-			}
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {	
-				/*
-				* ½ºÇÇ³Ê ¼±ÅÃ ¾ÈÇßÀ» ¶§ ¸®½º³Ê
-				*/
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "Nothing", 
-					Toast.LENGTH_SHORT).show();
-			}
-		});
-		
-		findViewById(R.id.ra1).setOnClickListener(new Button.OnClickListener(){  //ÀüÃ¼¼ºÀû ¼±ÅÃ
-			public void onClick(View v){ //ÀüÃ¼¼ºÀû
-				num=1;
-				/*
-				Toast.makeText(getApplicationContext(), "ÀüÃ¼", 
-						0).show();*/
-			}
-		});
-		findViewById(R.id.ra2).setOnClickListener(new Button.OnClickListener(){  //´©°è¼ºÀû ¼±ÅÃ
-			public void onClick(View v){
-				num=2;
-				/*Toast.makeText(getApplicationContext(), "´©°è", 
-						0).show();*/
-			}
-		});
-		findViewById(R.id.ra3).setOnClickListener(new Button.OnClickListener(){  //ÀÏºÎ¼ºÀû ¼±ÅÃ
-			public void onClick(View v){
-				num=3;				
-				/*Toast.makeText(getApplicationContext(), "ÀÏºÎ", 
-						0).show();*/
-			}
-		});			
-	}
-	
-	class MyJavaScriptInterface {
-		private Logmark activity;
-		
-		
-		public MyJavaScriptInterface(Logmark activity) {
-			this.activity = activity;
-			Log.d("web","ÆÄ½Ì 1");
-		}
+    ArrayList<customView> data_list;
+    CustomAdapter customAdapter;
+    customView temp;
+    Context context;
 
-		@android.webkit.JavascriptInterface
-		public void showHTML(String html) {
-			Log.d("web","view4");
-			Document doc = null;
-			doc = Jsoup.parse(html);
-			String sk;
-			String hj;
-			data_list.clear();
-			
-			String st1=new String();
-			String st2=new String();
-			String st3=new String();
-			String st4=new String();
-			String st5=new String();
-			String st6=new String();
-			
-			Elements rows1=null;  			//id°¡ htblTime2 ÀÎ Å×ÀÌºíÀÇ td¸¦ ±Ü¾î¿È
-			Elements rows2=null;  			
-			Elements rows3=null;  			// 
-			Elements rows4=null;  			//
-			int a=0;
-			
-			rows4 = doc.select("#Table1 td");        // °³ÀÎ Á¤º¸ Ãâ·ÂÇÏ´Â ºÎºĞ
-			name ="";
-			for(int e=1; e<12; e++){
-				if(e==1 || e==3 || e==7 || e==9 || e==11){
-					sk= rows4.get(e).toString();
-					StringTokenizer s0 = new StringTokenizer(sk);
-					s0.nextToken(";").substring(1);
+    String selectedItem;
+    String selectedyear;
+    public int num=1;
+    int sel=0;
+
+    String text;
+    String name;
+    int ok=0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.log_mark);
+
+        mWebView = (WebView) findViewById(R.id.web); // ì›¹ë·°ì™€ xml ê°„ ì—°ë™
+        mWebView.setWebViewClient(new WebViewClient());
+        Log.d("web","view1");
+
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true); // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
+        mWebView.setHorizontalScrollBarEnabled(false); //ê°€ë¡œ ìŠ¤í¬ë¡¤
+        mWebView.setVerticalScrollBarEnabled(false);
+        //edit = (TextView) findViewById(R.id.grade);
+
+        student2 = (TextView)findViewById(R.id.student2);
+        student1 = (TextView)findViewById(R.id.student1);
+        listView = (ListView)findViewById(R.id.listView);
+
+        text = new String();
+
+        context = this;
+
+        ArrayList array1= new ArrayList<String>();
+        ArrayList array2= new ArrayList<String>();
+
+        data_list = new ArrayList<customView>();
+
+        array1.add("1í•™ê¸°");						//10
+        array1.add("ê³„ì ˆí•™ê¸°(í•˜ê³„)");				//11
+        array1.add("2í•™ê¸°");						//20
+        array1.add("ê³„ì ˆí•™ê¸°(ë™ê³„)");				//21
+
+        selectedItem = new String();
+        selectedyear = new String();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.simple_spinner_dropdown_item,array1);
+        Spinner sp = (Spinner)findViewById(R.id.spinner2);
+        sp.setPrompt("í•™ê¸°ë¥¼ ì„ íƒí•˜ì„¸ìš”");
+        sp.setAdapter(adapter);
+
+        sp.setOnItemSelectedListener(new OnItemSelectedListener() {		// í•™ê¸°
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+				/*
+				* ìŠ¤í”¼ë„ˆ ì„ íƒ ë¦¬ìŠ¤ë„ˆ
+				*/
+                // ì„ íƒí•œ ì•„ì´í…œ
+                selectedItem=parent.getItemAtPosition(position).toString();
+                sel = parent.getSelectedItemPosition();
+
+                switch(sel){
+                    case 0:
+                        sel=10;
+                        break;
+                    case 1:
+                        sel=11;
+                        break;
+                    case 2:
+                        sel=20;
+                        break;
+                    case 3:
+                        sel=21;
+                        break;
+                }
+
+                Log.d("íŒŒì‹± í–ˆìŒ", Integer.toString(sel) );
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+				/*
+				* ìŠ¤í”¼ë„ˆ ì„ íƒ ì•ˆí–ˆì„ ë•Œ ë¦¬ìŠ¤ë„ˆ
+				*/
+                // TODO Auto-generated method stub
+            }
+        });
+
+        Calendar cal=Calendar.getInstance();
+        int year = Integer.parseInt(cal.getTime().toString().substring(30));
+
+        for(int a=0; a<20; a++){
+            array2.add(Integer.toString(year));
+            year--;
+        }
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>
+                (this,android.R.layout.simple_spinner_dropdown_item,array2);
+        Spinner sp2 = (Spinner)findViewById(R.id.spinner1);
+        sp2.setPrompt("í•™ë…„ë„ë¥¼ ì„ íƒí•˜ì„¸ìš”");
+        sp2.setAdapter(adapter1);
+        sp2.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+				/*
+				* ìŠ¤í”¼ë„ˆ ì„ íƒ ë¦¬ìŠ¤ë„ˆ
+				*/
+                // ì„ íƒí•œ ì•„ì´í…œ
+                selectedyear=parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+				/*
+				* ìŠ¤í”¼ë„ˆ ì„ íƒ ì•ˆí–ˆì„ ë•Œ ë¦¬ìŠ¤ë„ˆ
+				*/
+                // TODO Auto-generated method stub
+                Toast.makeText(getApplicationContext(), "Nothing",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        findViewById(R.id.ra1).setOnClickListener(new Button.OnClickListener(){  //ì „ì²´ì„±ì  ì„ íƒ
+            public void onClick(View v){ //ì „ì²´ì„±ì 
+                num=1;
+				/*
+				Toast.makeText(getApplicationContext(), "ì „ì²´", 
+						0).show();*/
+            }
+        });
+        findViewById(R.id.ra2).setOnClickListener(new Button.OnClickListener(){  //ëˆ„ê³„ì„±ì  ì„ íƒ
+            public void onClick(View v){
+                num=2;
+				/*Toast.makeText(getApplicationContext(), "ëˆ„ê³„", 
+						0).show();*/
+            }
+        });
+        findViewById(R.id.ra3).setOnClickListener(new Button.OnClickListener(){  //ì¼ë¶€ì„±ì  ì„ íƒ
+            public void onClick(View v){
+                num=3;
+				/*Toast.makeText(getApplicationContext(), "ì¼ë¶€", 
+						0).show();*/
+            }
+        });
+    }
+
+    class MyJavaScriptInterface {
+        private Logmark activity;
+
+
+        public MyJavaScriptInterface(Logmark activity) {
+            this.activity = activity;
+            Log.d("web","íŒŒì‹± 1");
+        }
+
+        @android.webkit.JavascriptInterface
+        public void showHTML(String html) {
+            Log.d("web","view4");
+            Document doc = null;
+            doc = Jsoup.parse(html);
+            String sk;
+            String hj;
+            data_list.clear();
+
+            String st1=new String();
+            String st2=new String();
+            String st3=new String();
+            String st4=new String();
+            String st5=new String();
+            String st6=new String();
+
+            Elements rows1=null;  			//idê°€ htblTime2 ì¸ í…Œì´ë¸”ì˜ tdë¥¼ ê¸ì–´ì˜´
+            Elements rows2=null;
+            Elements rows3=null;  			//
+            Elements rows4=null;  			//
+            int a=0;
+
+            rows4 = doc.select("#Table1 td");        // ê°œì¸ ì •ë³´ ì¶œë ¥í•˜ëŠ” ë¶€ë¶„
+            name ="";
+            for(int e=1; e<12; e++){
+                if(e==1 || e==3 || e==7 || e==9 || e==11){
+                    sk= rows4.get(e).toString();
+                    StringTokenizer s0 = new StringTokenizer(sk);
+                    s0.nextToken(";").substring(1);
+
+                    if (e==9){
+                        name += "\n";
+                    }
+                    else if(e== 11 && e==7)
+                    {
+                        name+=s0.nextToken("<").substring(1);
+                        break;
+                    }
+                    name+=s0.nextToken("<").substring(1)+ "  ";
+                }
+            }
+
+            Log.d("web","for ë“¤ì–´ê°„ë‹¤");
+
+            if(num==1){											// ì „ì²´í•™ê¸°
+                rows1 = doc.select("#dgList1 td");
+                rows2 = doc.select("#lblCdtPass");  // ì·¨ë“í•™ì 
+                rows3 = doc.select("#lblGpa");		// í•™ì í‰ê· 
+                Log.d("showHTML", "ê¸ìŒ" );
+
+                sk= rows2.get(0).toString();
+                StringTokenizer s0 = new StringTokenizer(sk);
+                s0.nextToken("ì·¨");
+
+                text = s0.nextToken("<");
+
+                sk= rows3.get(0).toString();
+                StringTokenizer s1 = new StringTokenizer(sk);
+                s1.nextToken("í‰");
+                hj = s1.nextToken("&");
+                s1.nextToken("(");
+                hj +=" "+s1.nextToken("<");
+
+                text = text+"  "+ hj;
+                Log.d("íŒŒì‹± í–ˆìŒ",text);
+
+                a=rows1.size();
+                Log.d("íŒŒì‹± í–ˆìŒ",Integer.toString(a)+"ê°œ");
 					
-					if (e==9){
-						name += "\n";
-					}
-					else if(e== 11 && e==7)
-					{
-						name+=s0.nextToken("<").substring(1);
-						break;
-					}
-					name+=s0.nextToken("<").substring(1)+ "  ";
-				}
-			}
-			
-			Log.d("web","for µé¾î°£´Ù");
-			
-			if(num==1){											// ÀüÃ¼ÇĞ±â
-					rows1 = doc.select("#dgList1 td");
-					rows2 = doc.select("#lblCdtPass");  // ÃëµæÇĞÁ¡
-					rows3 = doc.select("#lblGpa");		// ÇĞÁ¡Æò±Õ
-					Log.d("showHTML", "±ÜÀ½" );
-					
-					sk= rows2.get(0).toString();
-					StringTokenizer s0 = new StringTokenizer(sk); 
-					s0.nextToken("Ãë");
-					
-					text = s0.nextToken("<");
-					
-					sk= rows3.get(0).toString();
-					StringTokenizer s1 = new StringTokenizer(sk); 
-					s1.nextToken("Æò");
-					hj = s1.nextToken("&");
-					s1.nextToken("(");
-					hj +=" "+s1.nextToken("<");
-					
-					text = text+"  "+ hj;
-					Log.d("ÆÄ½Ì ÇßÀ½",text);
-					
-					a=rows1.size();
-					Log.d("ÆÄ½Ì ÇßÀ½",Integer.toString(a)+"°³");
-					
-					/* ³âµµ / ÇĞ±â / ±³°ú¸ñ¹øÈ£ / ±³°ú¸ñ¸í / ÀÌ¼ö±¸ºĞ / ÇĞÁ¡ / ¼ºÀû               >> 7°³ ÇÑ¼¼Æ®
-					 * 5Ä­       3Ä­     pass        
+					/* ë…„ë„ / í•™ê¸° / êµê³¼ëª©ë²ˆí˜¸ / êµê³¼ëª©ëª… / ì´ìˆ˜êµ¬ë¶„ / í•™ì  / ì„±ì                >> 7ê°œ í•œì„¸íŠ¸
+					 * 5ì¹¸       3ì¹¸     pass        
 					 * 
 					 */
-					
-					temp =new customView("³âµµ","ÇĞ±â","±³°ú¸ñ¸í","ÀÌ¼ö±¸ºĞ","ÇĞÁ¡","¼ºÀû");
-					Log.d("ÀüÃ¼¼ºÀû","¸®½ºÆ® Ãß°¡Àü");
-					
-					data_list.add(temp);
-					
-					Log.d("ÀüÃ¼¼ºÀû","¸®½ºÆ® Ãß°¡1");
-					
-					for(int e=0 ; e<a ; e++){
-						sk=rows1.get(e).toString();
-						StringTokenizer s2 = new StringTokenizer(sk); 
-						hj=null;
-						if(e%7==2){ // ±³°ú¸ñ ¹øÈ£ »ı·«
-							continue;
-						}
-						else if(e<7){  // Á¦ÀÏ Ã³À½ ¸Ş´º ºÎºĞ (³âµµ / ÇĞ±â / ±³°ú¸ñ¹øÈ£ / ±³°ú¸ñ¸í / ÀÌ¼ö±¸ºĞ / ÇĞÁ¡ / ¼ºÀû ) ¿¡¼­ ±³°ú¸ñ ¹øÈ£´Â »ı·«
-							continue;
-						}
-						else if(e%7==0){  // ³âµµ   //ÁÙ¶ç¿ò
-							s2.nextToken(">");
-							s2.nextToken(">");
-							
-							st1=s2.nextToken("<").substring(1);
-							continue;
-						}
-						else if(e%7==1){   // ÇĞ±â
-							s2.nextToken(">");
-							s2.nextToken(">");
-							st2=s2.nextToken("<").substring(1);
-							continue;
-						}
-						else if(e%7==3){		// °ú¸ñ¸í
-							s2.nextToken(">");
-							s2.nextToken(">");
-							st3=s2.nextToken("<").substring(1);
-							continue;
-						}
-						
-						s2.nextToken(">");
-						s2.nextToken(">");
-						
-						switch(e%7){
-						case 4:	//ÀÌ¼ö±¸ºĞ
-							st4=s2.nextToken("<").substring(1);
-							break;
-						case 5:	// ÇĞÁ¡
-							st5=s2.nextToken("<").substring(1);
-							break;
-						case 6:	//¼ºÀû
-							st6=s2.nextToken("<").substring(1);
-							
-							temp = new customView(st1,st2,st3,st4,st5,st6);
-							data_list.add(temp);
-							
-							break;
-						}
-					}
-			}
-			
-			else if(num==2){
-				rows1 = doc.select("#dgList1 td");
-				
-				a=rows1.size();
-				
-				temp =new customView("³âµµ","ÇĞ±â","½ÅÃ»ÇĞÁ¡","ÃëµæÇĞÁ¡","ÆòÁ¡","");
-				data_list.add(temp);
-				
-				for(int e=5; e<a ;e++){
-					sk=rows1.get(e).toString();
-					StringTokenizer s2 = new StringTokenizer(sk); 
-					s2.nextToken(">");
-					s2.nextToken(">");
-					
-					if(e%5==0){ // ³âµµ
-						st1=s2.nextToken("<").substring(1);
-						if(e==(a-5)){  //¸¶Áö¸· ÇÕ°è row´Â "°è"
-							st1="°è";
-							continue;
-						}
-						continue;
-					}
-					else if(e%5==1){  //ÇĞ±â
-						st2=s2.nextToken("<").substring(1);
-						if(e==(a-4)){  //¸¶Áö¸· ÇÕ°è row´Â ºóÄ­À¸·Î
-							st2="";
-							continue;
-						}
-					}
-					else if(e%5==2){ //½ÅÃ»ÇĞÁ¡
-						st3=s2.nextToken("<").substring(1);
-						continue;
-					}
-					else if(e%5==3){  //ÃëµæÇĞÁ¡
-						st4=s2.nextToken("<").substring(1);
-					}
-					else if(e%5==4){   //ÆòÁ¡
-						st5=s2.nextToken("<").substring(2);
-						temp = new customView(st1,st2,st3,st4,st5,"");
-						data_list.add(temp);
-						continue;
-					}
-				}
-			}
-			
-			else if(num==3){
-				rows1 = doc.select("#dgList1 td"); 		//¼ºÀû
-				rows2 = doc.select("#lblCdtPass"); 		// Ãëµæ ÇĞÁ¡ 
-				rows3 = doc.select("#lblGpa");		 	// ÇĞÁ¡ Æò±Õ
-				rows4 = doc.select("#lblRanking");		// ¼®Â÷
-				
-				a=rows1.size();
-				
-				if(a<=9){ 		// ¼ºÀû ¾ø´Â ³âµµ Á¶È¸½Ã
-					text = "Ãëµæ ÇĞÁ¡ÀÌ ¾ø½À´Ï´Ù.";
-					st1 = "    ";
-					st2 = "";
-					st3 = selectedyear+"³âµµ";
-					st5 = "";
-					st6 = "";
-					switch(sel){
-					case 10:
-						st4 = "1ÇĞ±â";
-						break;
-					case 11:
-						st4 = "°èÀıÇĞ±â(ÇÏ°è)";
-						break;
-					case 20:
-						st4 = "2ÇĞ±â";
-						break;
-					case 21:
-						st4 = "°èÀıÇĞ±â(µ¿°è)";
-						break;
-					}
-					temp = new customView(st1,st2,st3,st4,st5,st6);
-					data_list.add(temp);
-					
-					st3 = "¼ºÀû ³»¿ªÀÌ";
-					st4 = "¾ø½À´Ï´Ù.";
-					temp = new customView(st1,st2,st3,st4,st5,st6);
-					data_list.add(temp);
-				}
-				
-				else{
-					sk= rows2.get(0).toString();
-					StringTokenizer s0 = new StringTokenizer(sk); 
-					s0.nextToken("Ãë");
-					text = s0.nextToken("<");
-	
-					sk= rows3.get(0).toString();
-					StringTokenizer s1 = new StringTokenizer(sk); 
-					s1.nextToken("Æò");
-					text +="   "+s1.nextToken("<");
-					
-					sk= rows4.get(0).toString();
-					StringTokenizer s2 = new StringTokenizer(sk); 
-					s2.nextToken("¼®");
-					
-					text +="   "+s2.nextToken("<")+"\n\n ÆòÁ¡ : A+(4.5), A(4.0), " +
-							"B+(3.5), B(3.0), C+(2.5), C(2.0), D+(1.5), D(1.0), F(0.0)";
-					
-					temp =new customView("³âµµ","ÇĞ±â","±³°ú¸ñ¸í","ÀÌ¼ö±¸ºĞ","ÇĞÁ¡","¼ºÀû");
-					data_list.add(temp);
-					
-					for(int e=9 ; e<a ; e++){  				//ÇÑ ÁÙ¿¡ 9°³ÀÇ td°¡ ÀÖ´Ù
-						// 0:³âµµ 	 1:ÇĞ±â  	2:±³°ú¸ñ ¹øÈ£   	3:±³°ú¸ñ¸í 	 4:ÀÌ¼ö±¸ºĞ  	5:ÇĞÁ¡ 	 6:¼ºÀû  	7:ÆòÁ¡   	8:ÆòÁ¡*ÇĞÁ¡
-						//   *     *                   *         *         *       * 
-						
-						sk=rows1.get(e).toString();
-						StringTokenizer s3 = new StringTokenizer(sk); 
-						
-						if(e==9 || e==10){ 			// ¸ÇÃ³À½ ³âµµ ÇĞ±â Ç¥½Ã
-							s3.nextToken(">");
-							s3.nextToken(">");
-							if(e==9){
-								st1=s3.nextToken("<").substring(1);
-							}
-							else{
-								st2=s3.nextToken("<").substring(1);
-							}
-							continue;
-						}
-						else if((e%9)==2||(e%9)==7||(e%9)==8)  		// ±³°ú¸ñ¹øÈ£ , ÆòÁ¡ , ÆòÁ¡*ÇĞÁ¡ »ı·«
-							continue;
-						
-						switch((e%9)){
-						case 0:			//Ã³À½ row¿¡ ³âµµ Ç¥ÇöÈÄ ÀÌÈÄ´Â ºóÄ­À¸·Î Ãâ·Â
-							st1="";
-							break;
-						case 1:			//Ã³À½ row¿¡ ÇĞ±â Ç¥ÇöÈÄ ÀÌÈÄ´Â ºóÄ­À¸·Î Ãâ·Â
-							st2="";
-							break;
-						case 3:  		// ±³°ú¸ñ¸í
-							s3.nextToken(">");
-							s3.nextToken(">");
-							st3=s3.nextToken("<").substring(1);
-							break;
-						case 4:  		// ÀÌ¼ö±¸ºĞ
-							s3.nextToken(">");
-							s3.nextToken(">");
-							st4=s3.nextToken("<").substring(1);
-							break;
-						case 5:  		// ÇĞÁ¡
-							s3.nextToken(">");
-							s3.nextToken(">");
-							st5=s3.nextToken("<").substring(1);
-							break;
-						case 6:  		// ¼ºÀû
-							s3.nextToken(">");
-							s3.nextToken(">");
-							st6=s3.nextToken("<").substring(1);
-							
-							temp = new customView(st1,st2,st3,st4,st5,st6);
-							data_list.add(temp);
-							break;
-						}
-					}
-				}
-			}
-			
-			Log.d("wep parse","adapter before");
-			customAdapter = new CustomAdapter(context,R.layout.custom, data_list);
-			Log.d("wep parse","adapter after");
-			
-			backthread thread = new backthread();
-			thread.setDaemon(true);
-			thread.start();							// ui¿¡ ½Ã°£Ç¥ ³Ö´Â ½º·¹µå µ¹¸²
-		}
-	}
-	
-	////// ÇÚµé ¾²·¹µå »ç¿ë     UI  º¯°æ
-	class backthread extends Thread{
-		public void run(){
-			if(ok==1){
-				Log.d("thread","run");
-				mHandler.sendEmptyMessage(0);
-				ok=0;
-			}
-		}
-	}
-	
-	Handler mHandler = new Handler(){
-		public void handleMessage(Message mag){
-			if(mag.what==0){
-				Log.d("thread","run gogo");
-				student2.setText("");
-				
-				student1.setText(name);
-				listView.setAdapter(customAdapter);
-				Log.d("wep parse","!!!set adapter after");
-				if(num!=2){
-					student2.setText(text);
-				}
-			}
-		}
-	};
-	
-	/// È®ÀÎ ¹öÆ° 
-	public void search(View v) {
-		
-		MyJavaScriptInterface inter=new MyJavaScriptInterface(this);
-		mWebView.addJavascriptInterface(inter,"HtmlViewer");
-		
-		Log.d("web","view3");
-		mWebView.setOnTouchListener(new View.OnTouchListener() {	// ÅÍÄ¡ ¸®½º³Ê·Î ¹«ºù ÅÍÄ¡ ¹ß»ı ½Ã ½ºÅ©·Ñ ¾ø°Ô
-		    public boolean onTouch(View v, MotionEvent event) {
-		      return (event.getAction() == MotionEvent.ACTION_MOVE);
-		    }
-		  });
-		
-		mWebView.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onReceivedSslError(WebView view,
-					SslErrorHandler handler, SslError error) {
-				handler.proceed(); // SSL ¿¡·¯°¡ ¹ß»ıÇØµµ °è¼Ó ÁøÇà!
-			}
 
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				mWebView.loadUrl("javascript:window.HtmlViewer.showHTML"
-						+ "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
-				Log.d("À¸¾Æ¾Æ", "Ã¼Å©2&&==");
-			}
-		});
-		
-		student2.setText("");
-		
-		ok=1;
-		switch(num){  // ¿©±â¼­ urlÀ» Á¤ÇØÁÖ¸é  showHTML¸Ş¼­µå°¡ ½ÌÇàµÈ´Ù
-		case 1:
-			Log.d("check", "ÀüÃ¼ ¼ºÀû");
-			mWebView.loadUrl("https://student.donga.ac.kr/Univ/SUH/SSUH0011.aspx?m=6&rbtn=1");  //ÀüÃ¼
-			break;
-		case 2:
-			Log.d("check", "´©°è¼ºÀû");
-			mWebView.loadUrl("https://student.donga.ac.kr/Univ/SUH/SSUH0014.aspx?m=6&rbtn=4"); // ´©°è
-			break;
-		case 3:
-			Log.d("check", "ºÎºĞ ¼ºÀû");
-			mWebView.loadUrl("http://student.donga.ac.kr/Univ/SUH/SSUH0012.aspx?m=6&rbtn=2&year="+selectedyear+"&smt="+sel); // ÀÏºÎ
-			break;		
-		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.logmark , menu);
-		return true;
-	}
+                temp =new customView("ë…„ë„","í•™ê¸°","êµê³¼ëª©ëª…","ì´ìˆ˜êµ¬ë¶„","í•™ì ","ì„±ì ");
+                Log.d("ì „ì²´ì„±ì ","ë¦¬ìŠ¤íŠ¸ ì¶”ê°€ì „");
+
+                data_list.add(temp);
+
+                Log.d("ì „ì²´ì„±ì ","ë¦¬ìŠ¤íŠ¸ ì¶”ê°€1");
+
+                for(int e=0 ; e<a ; e++){
+                    sk=rows1.get(e).toString();
+                    StringTokenizer s2 = new StringTokenizer(sk);
+                    hj=null;
+                    if(e%7==2){ // êµê³¼ëª© ë²ˆí˜¸ ìƒëµ
+                        continue;
+                    }
+                    else if(e<7){  // ì œì¼ ì²˜ìŒ ë©”ë‰´ ë¶€ë¶„ (ë…„ë„ / í•™ê¸° / êµê³¼ëª©ë²ˆí˜¸ / êµê³¼ëª©ëª… / ì´ìˆ˜êµ¬ë¶„ / í•™ì  / ì„±ì  ) ì—ì„œ êµê³¼ëª© ë²ˆí˜¸ëŠ” ìƒëµ
+                        continue;
+                    }
+                    else if(e%7==0){  // ë…„ë„   //ì¤„ë„ì›€
+                        s2.nextToken(">");
+                        s2.nextToken(">");
+
+                        st1=s2.nextToken("<").substring(1);
+                        continue;
+                    }
+                    else if(e%7==1){   // í•™ê¸°
+                        s2.nextToken(">");
+                        s2.nextToken(">");
+                        st2=s2.nextToken("<").substring(1);
+                        continue;
+                    }
+                    else if(e%7==3){		// ê³¼ëª©ëª…
+                        s2.nextToken(">");
+                        s2.nextToken(">");
+                        st3=s2.nextToken("<").substring(1);
+                        continue;
+                    }
+
+                    s2.nextToken(">");
+                    s2.nextToken(">");
+
+                    switch(e%7){
+                        case 4:	//ì´ìˆ˜êµ¬ë¶„
+                            st4=s2.nextToken("<").substring(1);
+                            break;
+                        case 5:	// í•™ì 
+                            st5=s2.nextToken("<").substring(1);
+                            break;
+                        case 6:	//ì„±ì 
+                            st6=s2.nextToken("<").substring(1);
+
+                            temp = new customView(st1,st2,st3,st4,st5,st6);
+                            data_list.add(temp);
+
+                            break;
+                    }
+                }
+            }
+
+            else if(num==2){
+                rows1 = doc.select("#dgList1 td");
+
+                a=rows1.size();
+
+                temp =new customView("ë…„ë„","í•™ê¸°","ì‹ ì²­í•™ì ","ì·¨ë“í•™ì ","í‰ì ","");
+                data_list.add(temp);
+
+                for(int e=5; e<a ;e++){
+                    sk=rows1.get(e).toString();
+                    StringTokenizer s2 = new StringTokenizer(sk);
+                    s2.nextToken(">");
+                    s2.nextToken(">");
+
+                    if(e%5==0){ // ë…„ë„
+                        st1=s2.nextToken("<").substring(1);
+                        if(e==(a-5)){  //ë§ˆì§€ë§‰ í•©ê³„ rowëŠ” "ê³„"
+                            st1="ê³„";
+                            continue;
+                        }
+                        continue;
+                    }
+                    else if(e%5==1){  //í•™ê¸°
+                        st2=s2.nextToken("<").substring(1);
+                        if(e==(a-4)){  //ë§ˆì§€ë§‰ í•©ê³„ rowëŠ” ë¹ˆì¹¸ìœ¼ë¡œ
+                            st2="";
+                            continue;
+                        }
+                    }
+                    else if(e%5==2){ //ì‹ ì²­í•™ì 
+                        st3=s2.nextToken("<").substring(1);
+                        continue;
+                    }
+                    else if(e%5==3){  //ì·¨ë“í•™ì 
+                        st4=s2.nextToken("<").substring(1);
+                    }
+                    else if(e%5==4){   //í‰ì 
+                        st5=s2.nextToken("<").substring(2);
+                        temp = new customView(st1,st2,st3,st4,st5,"");
+                        data_list.add(temp);
+                        continue;
+                    }
+                }
+            }
+
+            else if(num==3){
+                rows1 = doc.select("#dgList1 td"); 		//ì„±ì 
+                rows2 = doc.select("#lblCdtPass"); 		// ì·¨ë“ í•™ì 
+                rows3 = doc.select("#lblGpa");		 	// í•™ì  í‰ê· 
+                rows4 = doc.select("#lblRanking");		// ì„ì°¨
+
+                a=rows1.size();
+
+                if(a<=9){ 		// ì„±ì  ì—†ëŠ” ë…„ë„ ì¡°íšŒì‹œ
+                    text = "ì·¨ë“ í•™ì ì´ ì—†ìŠµë‹ˆë‹¤.";
+                    st1 = "    ";
+                    st2 = "";
+                    st3 = selectedyear+"ë…„ë„";
+                    st5 = "";
+                    st6 = "";
+                    switch(sel){
+                        case 10:
+                            st4 = "1í•™ê¸°";
+                            break;
+                        case 11:
+                            st4 = "ê³„ì ˆí•™ê¸°(í•˜ê³„)";
+                            break;
+                        case 20:
+                            st4 = "2í•™ê¸°";
+                            break;
+                        case 21:
+                            st4 = "ê³„ì ˆí•™ê¸°(ë™ê³„)";
+                            break;
+                    }
+                    temp = new customView(st1,st2,st3,st4,st5,st6);
+                    data_list.add(temp);
+
+                    st3 = "ì„±ì  ë‚´ì—­ì´";
+                    st4 = "ì—†ìŠµë‹ˆë‹¤.";
+                    temp = new customView(st1,st2,st3,st4,st5,st6);
+                    data_list.add(temp);
+                }
+
+                else{
+                    sk= rows2.get(0).toString();
+                    StringTokenizer s0 = new StringTokenizer(sk);
+                    s0.nextToken("ì·¨");
+                    text = s0.nextToken("<");
+
+                    sk= rows3.get(0).toString();
+                    StringTokenizer s1 = new StringTokenizer(sk);
+                    s1.nextToken("í‰");
+                    text +="   "+s1.nextToken("<");
+
+                    sk= rows4.get(0).toString();
+                    StringTokenizer s2 = new StringTokenizer(sk);
+                    s2.nextToken("ì„");
+
+                    text +="   "+s2.nextToken("<")+"\n\n í‰ì  : A+(4.5), A(4.0), " +
+                            "B+(3.5), B(3.0), C+(2.5), C(2.0), D+(1.5), D(1.0), F(0.0)";
+
+                    temp =new customView("ë…„ë„","í•™ê¸°","êµê³¼ëª©ëª…","ì´ìˆ˜êµ¬ë¶„","í•™ì ","ì„±ì ");
+                    data_list.add(temp);
+
+                    for(int e=9 ; e<a ; e++){  				//í•œ ì¤„ì— 9ê°œì˜ tdê°€ ìˆë‹¤
+                        // 0:ë…„ë„ 	 1:í•™ê¸°  	2:êµê³¼ëª© ë²ˆí˜¸   	3:êµê³¼ëª©ëª… 	 4:ì´ìˆ˜êµ¬ë¶„  	5:í•™ì  	 6:ì„±ì   	7:í‰ì    	8:í‰ì *í•™ì 
+                        //   *     *                   *         *         *       *
+
+                        sk=rows1.get(e).toString();
+                        StringTokenizer s3 = new StringTokenizer(sk);
+
+                        if(e==9 || e==10){ 			// ë§¨ì²˜ìŒ ë…„ë„ í•™ê¸° í‘œì‹œ
+                            s3.nextToken(">");
+                            s3.nextToken(">");
+                            if(e==9){
+                                st1=s3.nextToken("<").substring(1);
+                            }
+                            else{
+                                st2=s3.nextToken("<").substring(1);
+                            }
+                            continue;
+                        }
+                        else if((e%9)==2||(e%9)==7||(e%9)==8)  		// êµê³¼ëª©ë²ˆí˜¸ , í‰ì  , í‰ì *í•™ì  ìƒëµ
+                            continue;
+
+                        switch((e%9)){
+                            case 0:			//ì²˜ìŒ rowì— ë…„ë„ í‘œí˜„í›„ ì´í›„ëŠ” ë¹ˆì¹¸ìœ¼ë¡œ ì¶œë ¥
+                                st1="";
+                                break;
+                            case 1:			//ì²˜ìŒ rowì— í•™ê¸° í‘œí˜„í›„ ì´í›„ëŠ” ë¹ˆì¹¸ìœ¼ë¡œ ì¶œë ¥
+                                st2="";
+                                break;
+                            case 3:  		// êµê³¼ëª©ëª…
+                                s3.nextToken(">");
+                                s3.nextToken(">");
+                                st3=s3.nextToken("<").substring(1);
+                                break;
+                            case 4:  		// ì´ìˆ˜êµ¬ë¶„
+                                s3.nextToken(">");
+                                s3.nextToken(">");
+                                st4=s3.nextToken("<").substring(1);
+                                break;
+                            case 5:  		// í•™ì 
+                                s3.nextToken(">");
+                                s3.nextToken(">");
+                                st5=s3.nextToken("<").substring(1);
+                                break;
+                            case 6:  		// ì„±ì 
+                                s3.nextToken(">");
+                                s3.nextToken(">");
+                                st6=s3.nextToken("<").substring(1);
+
+                                temp = new customView(st1,st2,st3,st4,st5,st6);
+                                data_list.add(temp);
+                                break;
+                        }
+                    }
+                }
+            }
+
+            Log.d("wep parse","adapter before");
+            customAdapter = new CustomAdapter(context,R.layout.custom, data_list);
+            Log.d("wep parse","adapter after");
+
+            backthread thread = new backthread();
+            thread.setDaemon(true);
+            thread.start();							// uiì— ì‹œê°„í‘œ ë„£ëŠ” ìŠ¤ë ˆë“œ ëŒë¦¼
+        }
+    }
+
+    ////// í•¸ë“¤ ì“°ë ˆë“œ ì‚¬ìš©     UI  ë³€ê²½
+    class backthread extends Thread{
+        public void run(){
+            if(ok==1){
+                Log.d("thread","run");
+                mHandler.sendEmptyMessage(0);
+                ok=0;
+            }
+        }
+    }
+
+    Handler mHandler = new Handler(){
+        public void handleMessage(Message mag){
+            if(mag.what==0){
+                Log.d("thread","run gogo");
+                student2.setText("");
+
+                student1.setText(name);
+                listView.setAdapter(customAdapter);
+                Log.d("wep parse","!!!set adapter after");
+                if(num!=2){
+                    student2.setText(text);
+                }
+            }
+        }
+    };
+
+    /// í™•ì¸ ë²„íŠ¼
+    public void search(View v) {
+
+        MyJavaScriptInterface inter=new MyJavaScriptInterface(this);
+        mWebView.addJavascriptInterface(inter,"HtmlViewer");
+
+        Log.d("web","view3");
+        mWebView.setOnTouchListener(new View.OnTouchListener() {	// í„°ì¹˜ ë¦¬ìŠ¤ë„ˆë¡œ ë¬´ë¹™ í„°ì¹˜ ë°œìƒ ì‹œ ìŠ¤í¬ë¡¤ ì—†ê²Œ
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getAction() == MotionEvent.ACTION_MOVE);
+            }
+        });
+
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view,
+                                           SslErrorHandler handler, SslError error) {
+                handler.proceed(); // SSL ì—ëŸ¬ê°€ ë°œìƒí•´ë„ ê³„ì† ì§„í–‰!
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                mWebView.loadUrl("javascript:window.HtmlViewer.showHTML"
+                        + "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
+                Log.d("ìœ¼ì•„ì•„", "ì²´í¬2&&==");
+            }
+        });
+
+        student2.setText("");
+
+        ok=1;
+        switch(num){  // ì—¬ê¸°ì„œ urlì„ ì •í•´ì£¼ë©´  showHTMLë©”ì„œë“œê°€ ì‹±í–‰ëœë‹¤
+            case 1:
+                Log.d("check", "ì „ì²´ ì„±ì ");
+                mWebView.loadUrl("https://student.donga.ac.kr/Univ/SUH/SSUH0011.aspx?m=6&rbtn=1");  //ì „ì²´
+                break;
+            case 2:
+                Log.d("check", "ëˆ„ê³„ì„±ì ");
+                mWebView.loadUrl("https://student.donga.ac.kr/Univ/SUH/SSUH0014.aspx?m=6&rbtn=4"); // ëˆ„ê³„
+                break;
+            case 3:
+                Log.d("check", "ë¶€ë¶„ ì„±ì ");
+                mWebView.loadUrl("http://student.donga.ac.kr/Univ/SUH/SSUH0012.aspx?m=6&rbtn=2&year="+selectedyear+"&smt="+sel); // ì¼ë¶€
+                break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.logmark , menu);
+        return true;
+    }
 }

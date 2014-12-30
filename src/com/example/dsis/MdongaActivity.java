@@ -16,74 +16,74 @@ import android.widget.RelativeLayout;
 
 public class MdongaActivity extends Activity {
 
-	Intent itt;
-	int num = 0;
+    Intent itt;
+    int num = 0;
 
-	WebView mWebView;
-	WebSettings Wset;	
+    WebView mWebView;
+    WebSettings Wset;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);	 
-		setContentView(R.layout.mdonga);
-		
-		itt = getIntent();
-		num = itt.getIntExtra("code", 0);
-		
-		mWebView = (WebView)findViewById(R.id.mb_Wv); // À¥ºä¿Í xml °£ ¿¬µ¿
-		mWebView.setWebViewClient(new WebViewClient());
-		Wset = mWebView.getSettings();
-		Wset.setJavaScriptEnabled(true); // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mdonga);
 
-		//xml¿¡ ¼±¾ğÇÑ ÇÁ·Î±×·¡½º¹Ù¸¦ »ı¼ºÇÑ´Ù. id´Â xmlÀ» Âü°í
-		final ProgressBar mProgCircle = (ProgressBar)findViewById(R.id.bar);
-				
-		//loadUrl ¿Ï·á±îÁö ÇÁ·Î±×·¡½º¹Ù¸¦ º¸ÀÌ°Ô ¼³Á¤
-		mProgCircle.setVisibility(View.VISIBLE);
-		
-		mWebView.setWebViewClient(new WebViewClient() {
-			  @Override
-			  public void onPageFinished(WebView view,String url)
-			  {       
-			     if(mProgCircle.getVisibility() ==  View.VISIBLE){
-			       mProgCircle.setVisibility(View.INVISIBLE);
-			     }
-			   } 
-			}); 
+        itt = getIntent();
+        num = itt.getIntExtra("code", 0);
 
-		
-		if (num == 0)
-			mWebView.loadUrl("http://m.donga.ac.kr");
+        mWebView = (WebView)findViewById(R.id.mb_Wv); // ì›¹ë·°ì™€ xml ê°„ ì—°ë™
+        mWebView.setWebViewClient(new WebViewClient());
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true); // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
 
-		else if (num == 1) // °øÁö
-			mWebView.loadUrl("http://m.donga.ac.kr/WebApp/BOARD/MBASIC/List.asp?BIDX=15"); // À¥ºä
-																							// ÁÖ¼Ò
-		else if (num == 2) // ÇĞ»ç
-			mWebView.loadUrl("http://m.donga.ac.kr/WebApp/BOARD/MBASIC/List.asp?BIDX=102"); // À¥ºä
-																							// ÁÖ¼Ò
-		else if (num == 3) // ÇĞ½Ä
-			mWebView.loadUrl("http://m.donga.ac.kr/SUB003/SUB_003001.asp?PID=003001"); // À¥ºä
-																						// ÁÖ¼Ò
-		else if (num == 4) // ÀÚ°Ô
-			mWebView.loadUrl("http://m.donga.ac.kr/WebApp/BOARD/MBASIC/List.asp?BIDX=20"); // À¥ºä
-	
-	}
+        //xmlì— ì„ ì–¸í•œ í”„ë¡œê·¸ë˜ìŠ¤ë°”ë¥¼ ìƒì„±í•œë‹¤. idëŠ” xmlì„ ì°¸ê³ 
+        final ProgressBar mProgCircle = (ProgressBar)findViewById(R.id.bar);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.mdonga, menu);
-		return true;
-	}
+        //loadUrl ì™„ë£Œê¹Œì§€ í”„ë¡œê·¸ë˜ìŠ¤ë°”ë¥¼ ë³´ì´ê²Œ ì„¤ì •
+        mProgCircle.setVisibility(View.VISIBLE);
 
-	public boolean onKeyDown(int keyCode, KeyEvent event) {// µÚ·Î°¡±â ´­·ÈÀ»¶§ ÀÌÀüÆäÀÌÁö
-		// ³ª¿Àµµ·Ï
-		if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-			mWebView.loadUrl("javascript:history.go(-1);");// ÇÑÄ­µÚ·Î
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view,String url)
+            {
+                if(mProgCircle.getVisibility() ==  View.VISIBLE){
+                    mProgCircle.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
+        if (num == 0)
+            mWebView.loadUrl("http://m.donga.ac.kr");
+
+        else if (num == 1) // ê³µì§€
+            mWebView.loadUrl("http://m.donga.ac.kr/WebApp/BOARD/MBASIC/List.asp?BIDX=15"); // ì›¹ë·°
+            // ì£¼ì†Œ
+        else if (num == 2) // í•™ì‚¬
+            mWebView.loadUrl("http://m.donga.ac.kr/WebApp/BOARD/MBASIC/List.asp?BIDX=102"); // ì›¹ë·°
+            // ì£¼ì†Œ
+        else if (num == 3) // í•™ì‹
+            mWebView.loadUrl("http://m.donga.ac.kr/SUB003/SUB_003001.asp?PID=003001"); // ì›¹ë·°
+            // ì£¼ì†Œ
+        else if (num == 4) // ìê²Œ
+            mWebView.loadUrl("http://m.donga.ac.kr/WebApp/BOARD/MBASIC/List.asp?BIDX=20"); // ì›¹ë·°
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.mdonga, menu);
+        return true;
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {// ë’¤ë¡œê°€ê¸° ëˆŒë ¸ì„ë•Œ ì´ì „í˜ì´ì§€
+        // ë‚˜ì˜¤ë„ë¡
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+            mWebView.loadUrl("javascript:history.go(-1);");// í•œì¹¸ë’¤ë¡œ
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
 	
 

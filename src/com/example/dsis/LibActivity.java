@@ -12,76 +12,76 @@ import android.widget.ProgressBar;
 
 public class LibActivity extends Activity {
 
-	Intent itt;
+    Intent itt;
 
-	WebView mWebView;
-	WebSettings Wset;
+    WebView mWebView;
+    WebSettings Wset;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.lib);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.lib);
 
-		// xml¿¡ ¼±¾ğÇÑ ÇÁ·Î±×·¡½º¹Ù¸¦ »ı¼ºÇÑ´Ù. id´Â xmlÀ» Âü°í
-		final ProgressBar mProgCircle = (ProgressBar) findViewById(R.id.bar);
+        // xmlì— ì„ ì–¸í•œ í”„ë¡œê·¸ë˜ìŠ¤ë°”ë¥¼ ìƒì„±í•œë‹¤. idëŠ” xmlì„ ì°¸ê³ 
+        final ProgressBar mProgCircle = (ProgressBar) findViewById(R.id.bar);
 
-		mWebView = (WebView) findViewById(R.id.wv_lib); // À¥ºä¿Í xml °£ ¿¬µ¿
-		mWebView.setWebViewClient(new WebViewClient());
-		Wset = mWebView.getSettings();
-		Wset.setJavaScriptEnabled(true); // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
+        mWebView = (WebView) findViewById(R.id.wv_lib); // ì›¹ë·°ì™€ xml ê°„ ì—°ë™
+        mWebView.setWebViewClient(new WebViewClient());
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true); // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
 
-		// loadUrl ¿Ï·á±îÁö ÇÁ·Î±×·¡½º¹Ù¸¦ º¸ÀÌ°Ô ¼³Á¤
-		mProgCircle.setVisibility(View.VISIBLE);
+        // loadUrl ì™„ë£Œê¹Œì§€ í”„ë¡œê·¸ë˜ìŠ¤ë°”ë¥¼ ë³´ì´ê²Œ ì„¤ì •
+        mProgCircle.setVisibility(View.VISIBLE);
 
-		mWebView.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				if (mProgCircle.getVisibility() == View.VISIBLE) {
-					mProgCircle.setVisibility(View.INVISIBLE);
-				}
-			}
-		});
-		mWebView.loadUrl("http://m.donga.ac.kr/SUB003/SUB_003003.asp?PID=003003");
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                if (mProgCircle.getVisibility() == View.VISIBLE) {
+                    mProgCircle.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        mWebView.loadUrl("http://m.donga.ac.kr/SUB003/SUB_003003.asp?PID=003003");
 
-		itt = new Intent();
-		itt.setClass(LibActivity.this, LibInfoActivity.class);
-	}
+        itt = new Intent();
+        itt.setClass(LibActivity.this, LibInfoActivity.class);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.lib, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.lib, menu);
+        return true;
+    }
 
-	public void ck_st4(View v) // 4Ãş ±×·ì½ºÅÍµğ
-	{
-		itt.putExtra("code", 1);
-		startActivityForResult(itt, 0);
-	}
+    public void ck_st4(View v) // 4ì¸µ ê·¸ë£¹ìŠ¤í„°ë””
+    {
+        itt.putExtra("code", 1);
+        startActivityForResult(itt, 0);
+    }
 
-	public void ck_st5a(View v) // 5Ãş A
-	{
-		itt.putExtra("code", 2);
-		startActivityForResult(itt, 0);
-	}
+    public void ck_st5a(View v) // 5ì¸µ A
+    {
+        itt.putExtra("code", 2);
+        startActivityForResult(itt, 0);
+    }
 
-	public void ck_st5b(View v) // 5Ãş B
-	{
-		itt.putExtra("code", 3);
-		startActivityForResult(itt, 0);
-	}
+    public void ck_st5b(View v) // 5ì¸µ B
+    {
+        itt.putExtra("code", 3);
+        startActivityForResult(itt, 0);
+    }
 
-	public void ck_st5c(View v) // 5Ãş C
-	{
-		itt.putExtra("code", 4);
-		startActivityForResult(itt, 0);
-	}
+    public void ck_st5c(View v) // 5ì¸µ C
+    {
+        itt.putExtra("code", 4);
+        startActivityForResult(itt, 0);
+    }
 
-	public void ck_st5d(View v) // 5Ãş D
-	{
-		itt.putExtra("code", 5);
-		startActivityForResult(itt, 0);
-	}
+    public void ck_st5d(View v) // 5ì¸µ D
+    {
+        itt.putExtra("code", 5);
+        startActivityForResult(itt, 0);
+    }
 
 }
