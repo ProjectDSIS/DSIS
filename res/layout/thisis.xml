@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:scrollbars="none"
+    tools:context=".ThisIsActivity" >
+
+    <Button
+        android:id="@+id/timetable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="130dp"
+        android:text="시간표"
+        android:onClick="ck_timetable" />
+
+    <Button
+        android:id="@+id/student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="30dp"
+        android:text="학적부"
+        android:onClick="ck_student" />
+
+    <Button
+        android:id="@+id/mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="220dp"
+        android:text="성적조회"
+        android:onClick="ck_mark" />
+
+</RelativeLayout>

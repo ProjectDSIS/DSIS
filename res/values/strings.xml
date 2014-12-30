@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DSIS</string>
+    <string name="title_activity_start">DSIS</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_mdonga">MainActivity</string>
+    <string name="title_activity_map">MainActivity</string>
+    <string name="title_activity_developer">MainActivity</string>
+    <string name="title_activity_floor">MainActivity</string>
+    <string name="title_activity_callservice">CallserviceActivity</string>
+    <string name="title_activity_lib">MainActivity</string>
+    <string name="title_activity_lib_info">LibInfoActivity</string>
+    <string name="title_activity_call_han">CallHanActivity</string>
+    <string name="title_activity_call_chik">CallChikActivity</string>
+    <string name="title_activity_call_chin">CallChinActivity</string>
+    <string name="title_activity_sfmajor">SFMajorActivity</string>
+    <string name="title_activity_this_is">ThisIsActivity</string>
+    <string name="title_activity_log_main">LogMainActivity</string>
+    <string name="title_activity_timet">TimetActivity</string>
+    <string name="title_activity_service">ServiceActivity</string>
+    <string name="title_activity_bae_dal">BaeDalActivity</string>
+    <string name="title_activity_sh">SHActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_bm">BmActivity</string>
+    <string name="title_activity_gd">GdActivity</string>
+    <string name="title_activity_logmark">Logmark</string>
+    <string name="title_activity_student">Student</string>
+
+</resources>

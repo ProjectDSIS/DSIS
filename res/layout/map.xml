@@ -1,0 +1,423 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/map"
+    tools:context=".MapActivity" >
+	
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <!-- 1번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 2번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="270"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s16" />
+            
+             <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="80"
+                android:background="#00ee0000" />
+            
+             <ImageButton
+                android:id="@+id/iB15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s15" />
+             
+             <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="160"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 3번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="260"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s06"
+                android:onClick="ck_s06" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="180"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s13"
+                android:onClick="ck_s13" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 4번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="250"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s04" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s05"/>
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s12"/>
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="150"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+         <!-- 5번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="170"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s03" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="150"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s11" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="170"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 6번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="120"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s02" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="140"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s10" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB09"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s09" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="70"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+         <!-- 7번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 8번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s01" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="350"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB08"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s08" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+         <!-- 9번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 10번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="250"
+                android:background="#00ee0000" />
+            
+            <ImageButton
+                android:id="@+id/iB07"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/s07" />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="250"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+         <!-- 11번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        <!-- 12번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+         <!-- 13번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+            
+        </LinearLayout>
+        
+        
+        
+     </LinearLayout>
+        
+
+</RelativeLayout>

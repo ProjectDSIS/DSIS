@@ -1,0 +1,467 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dmain"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <!-- 1번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/temp"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00ee0000" />
+        </LinearLayout>
+
+        <!-- 2번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="100"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_notice"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_notice" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00ee0000" />
+
+            <Button
+                android:id="@+id/btn_study"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_study" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_dsis1"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_dsis" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 3번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="107"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_dsis2"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_dsis" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 4번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="213"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_dsis3"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_dsis"  />
+            
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 5번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="100"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_eat1"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_eat" />
+
+            <Button
+                android:id="@+id/tbtn_eat2"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00ff00ff"
+                android:onClick="ck_eat"  />
+
+            <Button
+                android:id="@+id/btn_eat3"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_eat" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_dsis4"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_dsis" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 6번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 7번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="100"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_service"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_service" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_map1"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_map" />
+
+            <Button
+                android:id="@+id/map2"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00ff00ff" 
+                android:onClick="ck_map" />
+
+            <Button
+                android:id="@+id/btn_map3"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_map" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 8번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 9번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="100"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00000000"/>
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_lib"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_lib" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_dt"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_dt" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 10번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 11번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="100"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00000000" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_free1"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="95"
+                android:background="#00ff00ff"
+                android:onClick="ck_free" />
+
+            <Button
+                android:id="@+id/free2"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00ff00ff" 
+                android:onClick="ck_free"/>
+
+            <Button
+                android:id="@+id/btn_free3"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="137"
+                android:background="#00ff00ff"
+                android:onClick="ck_free" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <!-- 12번째 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="8"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="11"
+                android:background="#00000000" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/counting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:visibility="invisible" />
+
+</RelativeLayout>
