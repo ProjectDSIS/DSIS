@@ -12,80 +12,74 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class CustomAdapter extends BaseAdapter  {
-	ArrayList<customView> items;
-	LayoutInflater Inflater;  // ºä¸¦ xmlÀ» ÀÌ¿ëÇÏ¿© °´Ã¼È­ ÇÒ¶§ »ç¿ë
-	Context context;
-	int layout;
-	
-	public CustomAdapter(Context context, int layout, ArrayList<customView> items) {
-		this.items = items;
-		this.context = context;
-		this.layout=layout;
-		Inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		
-		CustomViewHolder viewHolder;
-		 
-	    // Ä³½ÃµÈ ºä°¡ ¾øÀ» °æ¿ì »õ·Î »ı¼ºÇÏ°í ºäÈ¦´õ¸¦ »ı¼ºÇÑ´Ù
-	    if(convertView == null)
-	    {
-	        convertView = Inflater.inflate(layout, parent, false);
-	 
-	        viewHolder = new CustomViewHolder();
-	        
-	        viewHolder.t1 = (TextView)convertView.findViewById(R.id.text1);  // ºäÀÇ ui¿Í ºäÈ¦´õ¸¦ ¿¬°á
-	        viewHolder.t2 = (TextView)convertView.findViewById(R.id.text2);
-	        viewHolder.t3 = (TextView)convertView.findViewById(R.id.text3);
-	        viewHolder.t4 = (TextView)convertView.findViewById(R.id.text4);
-	        viewHolder.t5 = (TextView)convertView.findViewById(R.id.text5);
-	        viewHolder.t6 = (TextView)convertView.findViewById(R.id.text6);
-	        
-			Log.d("custom","check2");
-			// ¼ÂÆÃÇÑ ÅØ½ºÆ®ºäÀÇ ÅØ½ºÆ®¿¡ ÀÌ¸§°ú ÀüÈ­¹øÈ£¸¦ ³Ö¾îÁØ´Ù.
-			
-	        convertView.setTag(viewHolder);
-	    }
-	    // Ä³½ÃµÈ ºä°¡ ÀÖÀ» °æ¿ì ÀúÀåµÈ ºäÈ¦´õ¸¦ »ç¿ëÇÑ´Ù
-	    else
-	    {
-	        viewHolder = (CustomViewHolder) convertView.getTag();
-	    }
-	 
-	    viewHolder.t1.setText(items.get(position).st1_r());
-	    viewHolder.t2.setText(items.get(position).st2_r());
-	    viewHolder.t3.setText(items.get(position).st3_r());
-	    viewHolder.t4.setText(items.get(position).st4_r());
-	    viewHolder.t5.setText(items.get(position).st5_r());
-	    viewHolder.t6.setText(items.get(position).st6_r());
-	    
-	    if(viewHolder.t1.length()==2){ // Ã¹¹ø¤Š ÁÙÀº ³ì»ö?? À¸·Î ÇØÁÜ
-			viewHolder.t1.setBackgroundColor(Color.parseColor("#d5ebde"));
-			viewHolder.t2.setBackgroundColor(Color.parseColor("#d5ebde"));
-			viewHolder.t3.setBackgroundColor(Color.parseColor("#d5ebde"));
-			viewHolder.t4.setBackgroundColor(Color.parseColor("#d5ebde"));
-			viewHolder.t5.setBackgroundColor(Color.parseColor("#d5ebde"));
-			viewHolder.t6.setBackgroundColor(Color.parseColor("#d5ebde"));
-		}
-		if(viewHolder.t1.length()==4){  // ³âµµ ÇĞ±â°¡ Ç¥½ÃµÇ´Â ÁÙÀº È¸»öÀ¸·Î ÇØÁÜ
-			viewHolder.t1.setBackgroundColor(Color.parseColor("#eeeeee"));
-			viewHolder.t2.setBackgroundColor(Color.parseColor("#eeeeee"));
-			viewHolder.t3.setBackgroundColor(Color.parseColor("#eeeeee"));
-			viewHolder.t4.setBackgroundColor(Color.parseColor("#eeeeee"));
-			viewHolder.t5.setBackgroundColor(Color.parseColor("#eeeeee"));
-			viewHolder.t6.setBackgroundColor(Color.parseColor("#eeeeee"));
-		}
-		if(viewHolder.t1.length()==0){  // ³âµµ ÇĞ±â°¡ Ç¥½ÃµÇ´Â ÁÙÀº È¸»öÀ¸·Î ÇØÁÜ
-			viewHolder.t1.setBackgroundColor(Color.parseColor("#ffffff"));
-			viewHolder.t2.setBackgroundColor(Color.parseColor("#ffffff"));
-			viewHolder.t3.setBackgroundColor(Color.parseColor("#ffffff"));
-			viewHolder.t4.setBackgroundColor(Color.parseColor("#ffffff"));
-			viewHolder.t5.setBackgroundColor(Color.parseColor("#ffffff"));
-			viewHolder.t6.setBackgroundColor(Color.parseColor("#ffffff"));
-		}
-		
-		return convertView;
+    ArrayList<customView> items;
+    LayoutInflater Inflater;  // ë·°ë¥¼ xmlì„ ì´ìš©í•˜ì—¬ ê°ì²´í™” í• ë•Œ ì‚¬ìš©
+    Context context;
+    int layout;
+
+    public CustomAdapter(Context context, int layout, ArrayList<customView> items) {
+        this.items = items;
+        this.context = context;
+        this.layout=layout;
+        Inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        CustomViewHolder viewHolder;
+
+        // ìºì‹œëœ ë·°ê°€ ì—†ì„ ê²½ìš° ìƒˆë¡œ ìƒì„±í•˜ê³  ë·°í™€ë”ë¥¼ ìƒì„±í•œë‹¤
+        if(convertView == null)
+        {
+            convertView = Inflater.inflate(layout, parent, false);
+            viewHolder = new CustomViewHolder();
+
+            // ë·°ì˜ uiì™€ ë·°í™€ë”ë¥¼ ì—°ê²°
+            for(int i =0; i < viewHolder.getLength(); i++)
+            {
+                int id = convertView.getResources().getIdentifier("text"+(i+1), "id", "com.example.dsis");
+                viewHolder.textView[i] = (TextView)convertView.findViewById(id);
+            }
+
+            Log.d("custom","check2");
+            // ì…‹íŒ…í•œ í…ìŠ¤íŠ¸ë·°ì˜ í…ìŠ¤íŠ¸ì— ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ë¥¼ ë„£ì–´ì¤€ë‹¤.
+
+            convertView.setTag(viewHolder);
+        }
+        // ìºì‹œëœ ë·°ê°€ ìˆì„ ê²½ìš° ì €ì¥ëœ ë·°í™€ë”ë¥¼ ì‚¬ìš©í•œë‹¤
+        else
+        {
+            viewHolder = (CustomViewHolder) convertView.getTag();
+        }
+
+        for(int i =0; i<viewHolder.getLength(); i++)
+        {
+            viewHolder.textView[i].setText(items.get(position).getString(i));
+        }
+
+        if(viewHolder.getLength() == 2)
+        {
+            for(int i =0; i<viewHolder.getLength(); i++)
+            {
+                viewHolder.textView[i].setBackgroundColor(Color.parseColor("#d5ebde"));
+            }
+        }
+        if(viewHolder.getLength() == 4)
+        {
+            for(int i =0; i<viewHolder.getLength(); i++)
+            {
+                viewHolder.textView[i].setBackgroundColor(Color.parseColor("#eeeeee"));
+            }
+        }
+        if(viewHolder.getLength() == 0) // ë…„ë„ í•™ê¸°ê°€ í‘œì‹œë˜ëŠ” ì¤„ì€ íšŒìƒ‰ìœ¼ë¡œ í•´ì¤Œ
+        {
+            for(int i =0; i<viewHolder.getLength(); i++)
+            {
+                viewHolder.textView[i].setBackgroundColor(Color.parseColor("#ffffff"));
+            }
+        }
+
+        return convertView;
 /*
 		View v = convertView;			
 
@@ -97,7 +91,7 @@ public class CustomAdapter extends BaseAdapter  {
 		Log.d("custom","check1");
 		if ( p != null )
 		{
-			// 2°³ÀÇ ÅØ½ºÆ®ºä¸¦ ¼ÂÆÃÇØÁØ´Ù.
+			// 2ê°œì˜ í…ìŠ¤íŠ¸ë·°ë¥¼ ì…‹íŒ…í•´ì¤€ë‹¤.
 			TextView t1 = (TextView)v.findViewById(R.id.text1);
 			TextView t2 = (TextView)v.findViewById(R.id.text2);
 			TextView t3 = (TextView)v.findViewById(R.id.text3);
@@ -106,7 +100,7 @@ public class CustomAdapter extends BaseAdapter  {
 			TextView t6 = (TextView)v.findViewById(R.id.text6);
 
 			Log.d("custom","check2");
-			// ¼ÂÆÃÇÑ ÅØ½ºÆ®ºäÀÇ ÅØ½ºÆ®¿¡ ÀÌ¸§°ú ÀüÈ­¹øÈ£¸¦ ³Ö¾îÁØ´Ù.
+			// ì…‹íŒ…í•œ í…ìŠ¤íŠ¸ë·°ì˜ í…ìŠ¤íŠ¸ì— ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ë¥¼ ë„£ì–´ì¤€ë‹¤.
 			
 			t1.setText(items.get(position).st1_r());
 			t2.setText(items.get(position).st2_r());
@@ -115,7 +109,7 @@ public class CustomAdapter extends BaseAdapter  {
 			t5.setText(items.get(position).st5_r());
 			t6.setText(items.get(position).st6_r());
 			
-//			if(t2.getText().length()==2){ // Ã¹¹ø¤Š ÁÙÀº ³ì»ö?? À¸·Î ÇØÁÜ
+//			if(t2.getText().length()==2){ // ì²«ë²ˆ? ì¤„ì€ ë…¹ìƒ‰?? ìœ¼ë¡œ í•´ì¤Œ
 //				t1.setBackgroundColor(Color.parseColor("#d5ebde"));
 //				t2.setBackgroundColor(Color.parseColor("#d5ebde"));
 //				t3.setBackgroundColor(Color.parseColor("#d5ebde"));
@@ -123,7 +117,7 @@ public class CustomAdapter extends BaseAdapter  {
 //				t5.setBackgroundColor(Color.parseColor("#d5ebde"));
 //				t6.setBackgroundColor(Color.parseColor("#d5ebde"));
 //			}
-//			if(t2.getText().length()==4){  // ³âµµ ÇĞ±â°¡ Ç¥½ÃµÇ´Â ÁÙÀº È¸»öÀ¸·Î ÇØÁÜ
+//			if(t2.getText().length()==4){  // ë…„ë„ í•™ê¸°ê°€ í‘œì‹œë˜ëŠ” ì¤„ì€ íšŒìƒ‰ìœ¼ë¡œ í•´ì¤Œ
 //				t1.setBackgroundColor(Color.parseColor("#eeeeee"));
 //				t2.setBackgroundColor(Color.parseColor("#eeeeee"));
 //				t3.setBackgroundColor(Color.parseColor("#eeeeee"));
@@ -135,20 +129,20 @@ public class CustomAdapter extends BaseAdapter  {
 		}
 		Log.d("custom","check3");
 		return v;*/
-	}
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return items.size();
-	}
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    }
+    @Override
+    public int getCount() {
+        // TODO Auto-generated method stub
+        return items.size();
+    }
+    @Override
+    public Object getItem(int position) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public long getItemId(int position) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

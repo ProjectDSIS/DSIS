@@ -26,478 +26,478 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class TimetActivity extends Activity {
-	WebView mWebView;
-	WebSettings Wset;
-	public TextView[] timeT;
-	String[] sr;
-	String[] sub;
-	timeset set[];  // °ú¸ñ ÀúÀåÇÏ´Â Å¬·¡½º
-	int state[];  // °°Àº °ú¸ñÀÌ ¸î°³ ÀÖ´Â°¡
-	
-	int deviceWidth;
-	int deviceHeight;	
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.timet);
-		
-		//µğ¹ÙÀÌ½º ÇØ»óµµ ¸®ÅÏ
-				DisplayMetrics displayMetrics = new DisplayMetrics();
-				getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-				deviceWidth = displayMetrics.widthPixels;
-				deviceHeight =displayMetrics.heightPixels;
-				
-		
-		timeT=new TextView[90];
-		sr= new String[90];
-		sub= new String[10];
-		set = new timeset[90];
-		state = new int[10];
-		
-		Log.d("web","set setting");
-		
-		for(int c = 0 ; c<90 ; c++){
-			set[c] = new timeset();
-			set[c].num = 0;
-			set[c].num2 = 0;
-			set[c].room = "";
-			set[c].sub = "";
-			set[c].day = 0;
-			Log.d("web","set setting : "+c);
-		}
-		
-		mWebView = (WebView) findViewById(R.id.wv_1); // À¥ºä¿Í xml °£ ¿¬µ¿
-		mWebView.setWebViewClient(new WebViewClient());
-		Log.d("web","view1");
-		
-		Wset = mWebView.getSettings();
-		Wset.setJavaScriptEnabled(true); // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
-		mWebView.setHorizontalScrollBarEnabled(false); //°¡·Î ½ºÅ©·Ñ  
-		mWebView.setVerticalScrollBarEnabled(false);
+    WebView mWebView;
+    WebSettings Wset;
+    public TextView[] timeT;
+    String[] sr;
+    String[] sub;
+    timeset set[];  // ê³¼ëª© ì €ì¥í•˜ëŠ” í´ë˜ìŠ¤
+    int state[];  // ê°™ì€ ê³¼ëª©ì´ ëª‡ê°œ ìˆëŠ”ê°€
 
-		Log.d("web","view2");
-		
-		timeT[0]=(TextView)findViewById(R.id.time1_1);
-		timeT[1]=(TextView)findViewById(R.id.time1_2);
-		timeT[2]=(TextView)findViewById(R.id.time1_3);
-		timeT[3]=(TextView)findViewById(R.id.time1_4);
-		timeT[4]=(TextView)findViewById(R.id.time1_5);
-		
-		timeT[5]=(TextView)findViewById(R.id.time2_1);
-		timeT[6]=(TextView)findViewById(R.id.time2_2);
-		timeT[7]=(TextView)findViewById(R.id.time2_3);
-		timeT[8]=(TextView)findViewById(R.id.time2_4);
-		timeT[9]=(TextView)findViewById(R.id.time2_5);
-		
-		timeT[10]=(TextView)findViewById(R.id.time3_1);
-		timeT[11]=(TextView)findViewById(R.id.time3_2);
-		timeT[12]=(TextView)findViewById(R.id.time3_3);
-		timeT[13]=(TextView)findViewById(R.id.time3_4);
-		timeT[14]=(TextView)findViewById(R.id.time3_5);
-		
-		timeT[15]=(TextView)findViewById(R.id.time4_1);
-		timeT[16]=(TextView)findViewById(R.id.time4_2);
-		timeT[17]=(TextView)findViewById(R.id.time4_3);
-		timeT[18]=(TextView)findViewById(R.id.time4_4);
-		timeT[19]=(TextView)findViewById(R.id.time4_5);
-		
-		timeT[20]=(TextView)findViewById(R.id.time5_1);
-		timeT[21]=(TextView)findViewById(R.id.time5_2);
-		timeT[22]=(TextView)findViewById(R.id.time5_3);
-		timeT[23]=(TextView)findViewById(R.id.time5_4);
-		timeT[24]=(TextView)findViewById(R.id.time5_5);
-		
-		timeT[25]=(TextView)findViewById(R.id.time6_1);
-		timeT[26]=(TextView)findViewById(R.id.time6_2);
-		timeT[27]=(TextView)findViewById(R.id.time6_3);
-		timeT[28]=(TextView)findViewById(R.id.time6_4);
-		timeT[29]=(TextView)findViewById(R.id.time6_5);
-		
-		timeT[30]=(TextView)findViewById(R.id.time7_1);
-		timeT[31]=(TextView)findViewById(R.id.time7_2);
-		timeT[32]=(TextView)findViewById(R.id.time7_3);
-		timeT[33]=(TextView)findViewById(R.id.time7_4);
-		timeT[34]=(TextView)findViewById(R.id.time7_5);
-		
-		timeT[35]=(TextView)findViewById(R.id.time8_1);
-		timeT[36]=(TextView)findViewById(R.id.time8_2);
-		timeT[37]=(TextView)findViewById(R.id.time8_3);
-		timeT[38]=(TextView)findViewById(R.id.time8_4);
-		timeT[39]=(TextView)findViewById(R.id.time8_5);
-		
-		timeT[40]=(TextView)findViewById(R.id.time9_1);
-		timeT[41]=(TextView)findViewById(R.id.time9_2);
-		timeT[42]=(TextView)findViewById(R.id.time9_3);
-		timeT[43]=(TextView)findViewById(R.id.time9_4);
-		timeT[44]=(TextView)findViewById(R.id.time9_5);
-		
-		timeT[45]=(TextView)findViewById(R.id.time10_1);
-		timeT[46]=(TextView)findViewById(R.id.time10_2);
-		timeT[47]=(TextView)findViewById(R.id.time10_3);
-		timeT[48]=(TextView)findViewById(R.id.time10_4);
-		timeT[49]=(TextView)findViewById(R.id.time10_5);
-		
-		timeT[50]=(TextView)findViewById(R.id.time11_1);
-		timeT[51]=(TextView)findViewById(R.id.time11_2);
-		timeT[52]=(TextView)findViewById(R.id.time11_3);
-		timeT[53]=(TextView)findViewById(R.id.time11_4);
-		timeT[54]=(TextView)findViewById(R.id.time11_5);
-		
-		timeT[55]=(TextView)findViewById(R.id.time12_1);
-		timeT[56]=(TextView)findViewById(R.id.time12_2);
-		timeT[57]=(TextView)findViewById(R.id.time12_3);
-		timeT[58]=(TextView)findViewById(R.id.time12_4);
-		timeT[59]=(TextView)findViewById(R.id.time12_5);
-		
-		timeT[60]=(TextView)findViewById(R.id.time13_1);
-		timeT[61]=(TextView)findViewById(R.id.time13_2);
-		timeT[62]=(TextView)findViewById(R.id.time13_3);
-		timeT[63]=(TextView)findViewById(R.id.time13_4);
-		timeT[64]=(TextView)findViewById(R.id.time13_5);
-		
-		timeT[65]=(TextView)findViewById(R.id.time14_1);
-		timeT[66]=(TextView)findViewById(R.id.time14_2);
-		timeT[67]=(TextView)findViewById(R.id.time14_3);
-		timeT[68]=(TextView)findViewById(R.id.time14_4);
-		timeT[69]=(TextView)findViewById(R.id.time14_5);
-		
-		timeT[70]=(TextView)findViewById(R.id.time15_1);
-		timeT[71]=(TextView)findViewById(R.id.time15_2);
-		timeT[72]=(TextView)findViewById(R.id.time15_3);
-		timeT[73]=(TextView)findViewById(R.id.time15_4);
-		timeT[74]=(TextView)findViewById(R.id.time15_5);
-		
-		timeT[75]=(TextView)findViewById(R.id.time16_1);
-		timeT[76]=(TextView)findViewById(R.id.time16_2);
-		timeT[77]=(TextView)findViewById(R.id.time16_3);
-		timeT[78]=(TextView)findViewById(R.id.time16_4);
-		timeT[79]=(TextView)findViewById(R.id.time16_5);
-		
-		timeT[80]=(TextView)findViewById(R.id.time17_1);
-		timeT[81]=(TextView)findViewById(R.id.time17_2);
-		timeT[82]=(TextView)findViewById(R.id.time17_3);
-		timeT[83]=(TextView)findViewById(R.id.time17_4);
-		timeT[84]=(TextView)findViewById(R.id.time17_5);
-		
-		timeT[85]=(TextView)findViewById(R.id.time18_1);
-		timeT[86]=(TextView)findViewById(R.id.time18_2);
-		timeT[87]=(TextView)findViewById(R.id.time18_3);
-		timeT[88]=(TextView)findViewById(R.id.time18_4);
-		timeT[89]=(TextView)findViewById(R.id.time18_5);
-		
-		MyJavaScriptInterface inter=new MyJavaScriptInterface(this);
-		mWebView.addJavascriptInterface(inter,"HtmlViewer");
-		
-		Log.d("web","view3");
-		
-		mWebView.setOnTouchListener(new View.OnTouchListener() {	// ÅÍÄ¡ ¸®½º³Ê·Î ¹«ºù ÅÍÄ¡ ¹ß»ı ½Ã ½ºÅ©·Ñ ¾ø°Ô
-			
-		    public boolean onTouch(View v, MotionEvent event) {
-		      return (event.getAction() == MotionEvent.ACTION_MOVE);
-		    }
-		  });
-		
-		mWebView.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onReceivedSslError(WebView view,
-					SslErrorHandler handler, SslError error) {
-				handler.proceed(); // SSL ¿¡·¯°¡ ¹ß»ıÇØµµ °è¼Ó ÁøÇà!
-			}
+    int deviceWidth;
+    int deviceHeight;
 
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				mWebView.loadUrl("javascript:window.HtmlViewer.showHTML"
-						+ "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
-				Log.d("À¸¾Æ¾Æ", "Ã¼Å©2&&==");
-			}
-		});
-		
-		mWebView.loadUrl("http://student.donga.ac.kr/Univ/SUE/SSUE0020.aspx?m=3"); // À¥ºä·Î ÇĞ»ıÁ¤º¸ È­¸é ¾Æ¿È
-	}
-	
-	class MyJavaScriptInterface {
-		private TimetActivity activity;
-		String sk;  // ¿©°ú ¾ÈµÊ ÆÄ½Ì³»¿ë
-		int tb_num;
-		String sn;	// ºĞ¹İ
-		
-		
-		public MyJavaScriptInterface(TimetActivity activity) {
-			Log.d("web","view0");
-			this.activity = activity;
-			sk=new String();
-			sn=new String();
-		}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.timet);
 
-		@android.webkit.JavascriptInterface
-		public void showHTML(String html) {
-			Log.d("web","view4");
-			tb_num=0;
-			Document doc = null;
-			doc = Jsoup.parse(html);
-			Elements rows = doc.select("#htblTime2 td");  			//id°¡ htblTime2 ÀÎ Å×ÀÌºíÀÇ td¸¦ ±Ü¾î¿È
-			Log.d("ÆÄ½Ì ÇßÀ½","Çß¾î");
-			
-			for(int a=0;a<10;a++){ sub[a]=null; }
-			
-			for(int c = 0 ; c<90 ; c++){
-				set[c].num = 0;
-				set[c].num2 = 0;
-				set[c].room = "";
-				set[c].sub = "";
-				set[c].day = 0;
-			}
-			
-			for(int c=21 ; c<146; c++){ 							// ´ÙÀ½ÇàÀ¸·Î ³Ñ¾î°¨  ////////c¸¦ 3ºÎÅÍ ÇÏ´Â ÀÌÀ¯´Â 0Àº ¿äÀÏ ÇàÀÌ°í 1°ú2´Â º¸Åë ºñ¾îÀÖÀ½.
-				
-				if(deviceHeight == 2560 && deviceWidth == 1440)
-					mWebView.scrollTo(1,1); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 2560*1440 °¶5
-            	
-            	else if(deviceHeight == 2392 && deviceWidth == 1440)
-             		mWebView.scrollTo(1,1); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 2392*1440 G3
-            	
-            	else if(deviceHeight == 1920 && deviceWidth == 1080)
-            		mWebView.scrollTo(555,905); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1920*1080 ³ëÆ® 3
-            	
-            	else if(deviceHeight == 1776 && deviceWidth == 1080)
-            		mWebView.scrollTo(555,955); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1776*1080 G2
-            	
-            	else if(deviceHeight == 1280 && deviceWidth == 768)
-            		mWebView.scrollTo(370,605); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1280*768 ¿É G
-            	
-            	else if(deviceHeight == 1280 && deviceWidth == 720)
-            		mWebView.scrollTo(370,600); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1280*720 ³ëÆ® 2
-            	
-            	else if(deviceHeight == 1184 && deviceWidth == 720)
-            		mWebView.scrollTo(1,1); // À¥»çÀÌÆ® ·Î±×ÀÎ È­¸é Àı´ë ÁÂÇ¥ ¼³Á¤ 1184*720  º£°¡R3
-				
-				
-				if((c % 7)==0)  									// ½Ã°£ ³»¿ëµé¾î°¡ÀÖ´Â ¿¤¸®¸ÕÆ®´Â »ı·«
-				{
-					Log.d("À¸¾Æ¾Æ", "½Ã°£");					
-					continue;
-				}
-				
-				else if((c%7) == 6)   // Åä¿äÀÏ »ı·«.
-				{
-					Log.d("À¸¾Æ¾Æ", "Åä¿ç");
-					continue;
-				}
-				
-				else if((rows.get(c).toString().length()) < 50){    // ¼ö¾÷ÀÌ ¾ø¾î¼­ ¾Æ¹« ³»¿ë ¾ø´Â ¿¤¸®¸ÕÆ®´Â ºóÄ­ ³Ö¾îÁÜ
-					tb_num++;
-				}
-					
-				else{												// ½Ã°£ ³»¿ë ¿¤¸®¸ÕÆ®µµ ¾Æ´Ï°í ¼ö¾÷ÀÌ ¾ø¾î¼­ ºóÄ­ÀÎ ¿¤¸®¸ÕÆ®µµ ¾Æ´Ñ ¼ö¾÷ÀÖ´Â ¿¤¸®¸ÕÆ®µé
-					sk= rows.get(c).toString();
-					StringTokenizer s = new StringTokenizer(sk); 
+        //ë””ë°”ì´ìŠ¤ í•´ìƒë„ ë¦¬í„´
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        deviceWidth = displayMetrics.widthPixels;
+        deviceHeight =displayMetrics.heightPixels;
+
+
+        timeT=new TextView[90];
+        sr= new String[90];
+        sub= new String[10];
+        set = new timeset[90];
+        state = new int[10];
+
+        Log.d("web","set setting");
+
+        for(int c = 0 ; c<90 ; c++){
+            set[c] = new timeset();
+            set[c].num = 0;
+            set[c].num2 = 0;
+            set[c].room = "";
+            set[c].sub = "";
+            set[c].day = 0;
+            Log.d("web","set setting : "+c);
+        }
+
+        mWebView = (WebView) findViewById(R.id.wv_1); // ì›¹ë·°ì™€ xml ê°„ ì—°ë™
+        mWebView.setWebViewClient(new WebViewClient());
+        Log.d("web","view1");
+
+        Wset = mWebView.getSettings();
+        Wset.setJavaScriptEnabled(true); // ìë°”ìŠ¤í¬ë¦½íŠ¸ í—ˆìš©
+        mWebView.setHorizontalScrollBarEnabled(false); //ê°€ë¡œ ìŠ¤í¬ë¡¤
+        mWebView.setVerticalScrollBarEnabled(false);
+
+        Log.d("web","view2");
+
+        timeT[0]=(TextView)findViewById(R.id.time1_1);
+        timeT[1]=(TextView)findViewById(R.id.time1_2);
+        timeT[2]=(TextView)findViewById(R.id.time1_3);
+        timeT[3]=(TextView)findViewById(R.id.time1_4);
+        timeT[4]=(TextView)findViewById(R.id.time1_5);
+
+        timeT[5]=(TextView)findViewById(R.id.time2_1);
+        timeT[6]=(TextView)findViewById(R.id.time2_2);
+        timeT[7]=(TextView)findViewById(R.id.time2_3);
+        timeT[8]=(TextView)findViewById(R.id.time2_4);
+        timeT[9]=(TextView)findViewById(R.id.time2_5);
+
+        timeT[10]=(TextView)findViewById(R.id.time3_1);
+        timeT[11]=(TextView)findViewById(R.id.time3_2);
+        timeT[12]=(TextView)findViewById(R.id.time3_3);
+        timeT[13]=(TextView)findViewById(R.id.time3_4);
+        timeT[14]=(TextView)findViewById(R.id.time3_5);
+
+        timeT[15]=(TextView)findViewById(R.id.time4_1);
+        timeT[16]=(TextView)findViewById(R.id.time4_2);
+        timeT[17]=(TextView)findViewById(R.id.time4_3);
+        timeT[18]=(TextView)findViewById(R.id.time4_4);
+        timeT[19]=(TextView)findViewById(R.id.time4_5);
+
+        timeT[20]=(TextView)findViewById(R.id.time5_1);
+        timeT[21]=(TextView)findViewById(R.id.time5_2);
+        timeT[22]=(TextView)findViewById(R.id.time5_3);
+        timeT[23]=(TextView)findViewById(R.id.time5_4);
+        timeT[24]=(TextView)findViewById(R.id.time5_5);
+
+        timeT[25]=(TextView)findViewById(R.id.time6_1);
+        timeT[26]=(TextView)findViewById(R.id.time6_2);
+        timeT[27]=(TextView)findViewById(R.id.time6_3);
+        timeT[28]=(TextView)findViewById(R.id.time6_4);
+        timeT[29]=(TextView)findViewById(R.id.time6_5);
+
+        timeT[30]=(TextView)findViewById(R.id.time7_1);
+        timeT[31]=(TextView)findViewById(R.id.time7_2);
+        timeT[32]=(TextView)findViewById(R.id.time7_3);
+        timeT[33]=(TextView)findViewById(R.id.time7_4);
+        timeT[34]=(TextView)findViewById(R.id.time7_5);
+
+        timeT[35]=(TextView)findViewById(R.id.time8_1);
+        timeT[36]=(TextView)findViewById(R.id.time8_2);
+        timeT[37]=(TextView)findViewById(R.id.time8_3);
+        timeT[38]=(TextView)findViewById(R.id.time8_4);
+        timeT[39]=(TextView)findViewById(R.id.time8_5);
+
+        timeT[40]=(TextView)findViewById(R.id.time9_1);
+        timeT[41]=(TextView)findViewById(R.id.time9_2);
+        timeT[42]=(TextView)findViewById(R.id.time9_3);
+        timeT[43]=(TextView)findViewById(R.id.time9_4);
+        timeT[44]=(TextView)findViewById(R.id.time9_5);
+
+        timeT[45]=(TextView)findViewById(R.id.time10_1);
+        timeT[46]=(TextView)findViewById(R.id.time10_2);
+        timeT[47]=(TextView)findViewById(R.id.time10_3);
+        timeT[48]=(TextView)findViewById(R.id.time10_4);
+        timeT[49]=(TextView)findViewById(R.id.time10_5);
+
+        timeT[50]=(TextView)findViewById(R.id.time11_1);
+        timeT[51]=(TextView)findViewById(R.id.time11_2);
+        timeT[52]=(TextView)findViewById(R.id.time11_3);
+        timeT[53]=(TextView)findViewById(R.id.time11_4);
+        timeT[54]=(TextView)findViewById(R.id.time11_5);
+
+        timeT[55]=(TextView)findViewById(R.id.time12_1);
+        timeT[56]=(TextView)findViewById(R.id.time12_2);
+        timeT[57]=(TextView)findViewById(R.id.time12_3);
+        timeT[58]=(TextView)findViewById(R.id.time12_4);
+        timeT[59]=(TextView)findViewById(R.id.time12_5);
+
+        timeT[60]=(TextView)findViewById(R.id.time13_1);
+        timeT[61]=(TextView)findViewById(R.id.time13_2);
+        timeT[62]=(TextView)findViewById(R.id.time13_3);
+        timeT[63]=(TextView)findViewById(R.id.time13_4);
+        timeT[64]=(TextView)findViewById(R.id.time13_5);
+
+        timeT[65]=(TextView)findViewById(R.id.time14_1);
+        timeT[66]=(TextView)findViewById(R.id.time14_2);
+        timeT[67]=(TextView)findViewById(R.id.time14_3);
+        timeT[68]=(TextView)findViewById(R.id.time14_4);
+        timeT[69]=(TextView)findViewById(R.id.time14_5);
+
+        timeT[70]=(TextView)findViewById(R.id.time15_1);
+        timeT[71]=(TextView)findViewById(R.id.time15_2);
+        timeT[72]=(TextView)findViewById(R.id.time15_3);
+        timeT[73]=(TextView)findViewById(R.id.time15_4);
+        timeT[74]=(TextView)findViewById(R.id.time15_5);
+
+        timeT[75]=(TextView)findViewById(R.id.time16_1);
+        timeT[76]=(TextView)findViewById(R.id.time16_2);
+        timeT[77]=(TextView)findViewById(R.id.time16_3);
+        timeT[78]=(TextView)findViewById(R.id.time16_4);
+        timeT[79]=(TextView)findViewById(R.id.time16_5);
+
+        timeT[80]=(TextView)findViewById(R.id.time17_1);
+        timeT[81]=(TextView)findViewById(R.id.time17_2);
+        timeT[82]=(TextView)findViewById(R.id.time17_3);
+        timeT[83]=(TextView)findViewById(R.id.time17_4);
+        timeT[84]=(TextView)findViewById(R.id.time17_5);
+
+        timeT[85]=(TextView)findViewById(R.id.time18_1);
+        timeT[86]=(TextView)findViewById(R.id.time18_2);
+        timeT[87]=(TextView)findViewById(R.id.time18_3);
+        timeT[88]=(TextView)findViewById(R.id.time18_4);
+        timeT[89]=(TextView)findViewById(R.id.time18_5);
+
+        MyJavaScriptInterface inter=new MyJavaScriptInterface(this);
+        mWebView.addJavascriptInterface(inter,"HtmlViewer");
+
+        Log.d("web","view3");
+
+        mWebView.setOnTouchListener(new View.OnTouchListener() {	// í„°ì¹˜ ë¦¬ìŠ¤ë„ˆë¡œ ë¬´ë¹™ í„°ì¹˜ ë°œìƒ ì‹œ ìŠ¤í¬ë¡¤ ì—†ê²Œ
+
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getAction() == MotionEvent.ACTION_MOVE);
+            }
+        });
+
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view,
+                                           SslErrorHandler handler, SslError error) {
+                handler.proceed(); // SSL ì—ëŸ¬ê°€ ë°œìƒí•´ë„ ê³„ì† ì§„í–‰!
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                mWebView.loadUrl("javascript:window.HtmlViewer.showHTML"
+                        + "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
+                Log.d("ìœ¼ì•„ì•„", "ì²´í¬2&&==");
+            }
+        });
+
+        mWebView.loadUrl("http://student.donga.ac.kr/Univ/SUE/SSUE0020.aspx?m=3"); // ì›¹ë·°ë¡œ í•™ìƒì •ë³´ í™”ë©´ ì•„ì˜´
+    }
+
+    class MyJavaScriptInterface {
+        private TimetActivity activity;
+        String sk;  // ì—¬ê³¼ ì•ˆë¨ íŒŒì‹±ë‚´ìš©
+        int tb_num;
+        String sn;	// ë¶„ë°˜
+
+
+        public MyJavaScriptInterface(TimetActivity activity) {
+            Log.d("web","view0");
+            this.activity = activity;
+            sk=new String();
+            sn=new String();
+        }
+
+        @android.webkit.JavascriptInterface
+        public void showHTML(String html) {
+            Log.d("web","view4");
+            tb_num=0;
+            Document doc = null;
+            doc = Jsoup.parse(html);
+            Elements rows = doc.select("#htblTime2 td");  			//idê°€ htblTime2 ì¸ í…Œì´ë¸”ì˜ tdë¥¼ ê¸ì–´ì˜´
+            Log.d("íŒŒì‹± í–ˆìŒ","í–ˆì–´");
+
+            for(int a=0;a<10;a++){ sub[a]=null; }
+
+            for(int c = 0 ; c<90 ; c++){
+                set[c].num = 0;
+                set[c].num2 = 0;
+                set[c].room = "";
+                set[c].sub = "";
+                set[c].day = 0;
+            }
+
+            for(int c=21 ; c<146; c++){ 							// ë‹¤ìŒí–‰ìœ¼ë¡œ ë„˜ì–´ê°  ////////cë¥¼ 3ë¶€í„° í•˜ëŠ” ì´ìœ ëŠ” 0ì€ ìš”ì¼ í–‰ì´ê³  1ê³¼2ëŠ” ë³´í†µ ë¹„ì–´ìˆìŒ.
+
+                if(deviceHeight == 2560 && deviceWidth == 1440)
+                    mWebView.scrollTo(1,1); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 2560*1440 ê°¤5
+
+                else if(deviceHeight == 2392 && deviceWidth == 1440)
+                    mWebView.scrollTo(1,1); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 2392*1440 G3
+
+                else if(deviceHeight == 1920 && deviceWidth == 1080)
+                    mWebView.scrollTo(555,905); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1920*1080 ë…¸íŠ¸ 3
+
+                else if(deviceHeight == 1776 && deviceWidth == 1080)
+                    mWebView.scrollTo(555,955); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1776*1080 G2
+
+                else if(deviceHeight == 1280 && deviceWidth == 768)
+                    mWebView.scrollTo(370,605); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1280*768 ì˜µ G
+
+                else if(deviceHeight == 1280 && deviceWidth == 720)
+                    mWebView.scrollTo(370,600); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1280*720 ë…¸íŠ¸ 2
+
+                else if(deviceHeight == 1184 && deviceWidth == 720)
+                    mWebView.scrollTo(1,1); // ì›¹ì‚¬ì´íŠ¸ ë¡œê·¸ì¸ í™”ë©´ ì ˆëŒ€ ì¢Œí‘œ ì„¤ì • 1184*720  ë² ê°€R3
+
+
+                if((c % 7)==0)  									// ì‹œê°„ ë‚´ìš©ë“¤ì–´ê°€ìˆëŠ” ì—˜ë¦¬ë¨¼íŠ¸ëŠ” ìƒëµ
+                {
+                    Log.d("ìœ¼ì•„ì•„", "ì‹œê°„");
+                    continue;
+                }
+
+                else if((c%7) == 6)   // í† ìš”ì¼ ìƒëµ.
+                {
+                    Log.d("ìœ¼ì•„ì•„", "í† ìšœ");
+                    continue;
+                }
+
+                else if((rows.get(c).toString().length()) < 50){    // ìˆ˜ì—…ì´ ì—†ì–´ì„œ ì•„ë¬´ ë‚´ìš© ì—†ëŠ” ì—˜ë¦¬ë¨¼íŠ¸ëŠ” ë¹ˆì¹¸ ë„£ì–´ì¤Œ
+                    tb_num++;
+                }
+
+                else{												// ì‹œê°„ ë‚´ìš© ì—˜ë¦¬ë¨¼íŠ¸ë„ ì•„ë‹ˆê³  ìˆ˜ì—…ì´ ì—†ì–´ì„œ ë¹ˆì¹¸ì¸ ì—˜ë¦¬ë¨¼íŠ¸ë„ ì•„ë‹Œ ìˆ˜ì—…ìˆëŠ” ì—˜ë¦¬ë¨¼íŠ¸ë“¤
+                    sk= rows.get(c).toString();
+                    StringTokenizer s = new StringTokenizer(sk);
 					/*
 					 * <TD class="td20" valign="top" width="115">
-					 * GEE029-01&nbsp;&nbsp;ÇãÁöÈñ<br><a href="javascript:windowOpenPreKyoCuri('2013','20','GEE029','01');">
-					 * ±â¼ú°æ¿µ</a><br>RS709</TD>
+					 * GEE029-01&nbsp;&nbsp;í—ˆì§€í¬<br><a href="javascript:windowOpenPreKyoCuri('2013','20','GEE029','01');">
+					 * ê¸°ìˆ ê²½ì˜</a><br>RS709</TD>
 					*/
-					
-					s.nextToken("-");
-					sn=s.nextToken("&");  	//ºĞ¹İ Àß¶ó³¿
+
+                    s.nextToken("-");
+                    sn=s.nextToken("&");  	//ë¶„ë°˜ ì˜ë¼ëƒ„
 					
 					/*
 					s.nextToken(";");
 					s.nextToken(";");
-					tk[tb_num]+=s.nextToken("<");	//±³¼ö´Ô ÀÌ¸§ Àß¶ó´Ô
+					tk[tb_num]+=s.nextToken("<");	//êµìˆ˜ë‹˜ ì´ë¦„ ì˜ë¼ë‹˜
 					*/
-					
-					s.nextToken(">");
-					s.nextToken(">");
-					sr[tb_num]=s.nextToken("<");			//°ú¸ñ ÀÌ¸§ ÀÚ¸§
-					sr[tb_num]=sr[tb_num].substring(1);
-					
-					set[tb_num].sub = sr[tb_num].trim();  //trim >> ½ºÆ®¸µ¿¡ ¾çÂÊ ³¡ °ø¹é Àß¶ó³»´Â°Í
 
-					for(int a=0; a<10 ;a++){		//¸®½ºÆ®¿¡ °ú¸ñ¸¦À» ³Ö´Â´Ù
-						if(sub[a]==null){
-							sub[a]=sr[tb_num].trim();  //ºó°ø°£ Á¦°ÅÇØ¼­ ÀúÀå
-							set[tb_num].num=1;
-							break;
-						}
-						else if(sub[a].equals(set[tb_num].sub)){				//Áßº¹µÈ°Å¸é ³Ñ¾î°£´Ù.
-							Log.d("°°´Ù","°°´Ù   : "+tb_num);
-							
-							if(tb_num>4 && set[tb_num-5].sub.equals(set[tb_num].sub)){  // Àü ±³½Ã¿Í °°Àº °ú¸ñÀÏ¶§ ¼ø¼­ Ä«¿îÅÍ ++
-								Log.d("tb_num","Áß°£ "+ set[tb_num].sub +" // tb_num : "+tb_num);
-								
-								set[tb_num].num=set[tb_num-5].num+1;
-								break;
-							}else{ 			// Ã¹½Ã°£ µÇ´Â³ğµé
-								Log.d("tb_num","Ã¹½Ã°£ "+ set[tb_num].sub +" // tb_num : "+tb_num);
-								
-								set[tb_num].num=1;
-								break;
-							}
-						}
-					}
-					
-					switch(tb_num%5){
-					case 0:
-						set[tb_num].day = 1;		// ¿ù
-						break;
-					case 1:
-						set[tb_num].day = 2;		// È­
-						break;
-					case 2:
-						set[tb_num].day = 3;		// ¼ö 
-						break;
-					case 3:
-						set[tb_num].day = 4;		// ¸ñ
-						break;
-					case 4:
-						set[tb_num].day = 5;		// ±İ
-						break;
-					}
-					
-					s.nextToken(">");
-					s.nextToken(">");
-					set[tb_num].room=s.nextToken("<").substring(1)+sn;	// °­ÀÇ½Ç ÀÚ¸§ +ºĞ¹İ ºÙÀÓ (sn)
-					
-					tb_num++;
-				}
-				Log.d("tk","tb_num : "+tb_num);
-			}
-			
-			for(int a=0;a<10;a++){
-				if(sub[a]==null){
-					break;
-				}
-				Log.d("sub",sub[a]);
-				
-			}
-			
-			Log.d("web","view9");
-			
-			backthread thread = new backthread();
-			thread.setDaemon(true);
-			thread.start();							// ui¿¡ ½Ã°£Ç¥ ³Ö´Â ½º·¹µå µ¹¸²
-			
-		}
-	}
-	
-	class backthread extends Thread{
-		public void run(){
-			mHandler.sendEmptyMessage(0);
-		}
-	}
-	
-	Handler mHandler = new Handler(){
-		public void handleMessage(Message mag){
-			if(mag.what==0){
-				int a=0;
-				int turn=0; // 1ÀÌ¸é °ø°­¶§ È¸»ö¹ÙÅÁ 0ÀÌ¸é °ø°­¶§ ÁøÈ¸»ö ¹ÙÅÁ
-				
-				for(int c=0 ; c<90; c++){ 				// ´ÙÀ½ÇàÀ¸·Î ³Ñ¾î°¨  ////////c¸¦ 3ºÎÅÍ ÇÏ´Â ÀÌÀ¯´Â 0Àº ¿äÀÏ ÇàÀÌ°í 1°ú2´Â º¸Åë ºñ¾îÀÖÀ½.
-					Log.d("thread for",""+c);
-					timeT[c].setText("");
-					
-					if(c%5==0){		// ÇÑÁÙ¾¿ turnº¯¼ö¸¦ ¹Ù²ãÁÜ
-						switch(turn){
-						case 0:
-							turn = 1;
-							break;
-						case 1:
-							turn = 0;
-							break;
-						}
-					}
-					
-					if(set[c].sub.length()<2){ 				// ¼ö¾÷ÀÌ ¾ø¾î¼­ ¾Æ¹« ³»¿ë ¾ø´Â ¿¤¸®¸ÕÆ®´Â ºóÄ­ ³Ö¾îÁÜ
-						Log.d("textview", "°ø°­");
-						//timeT[c].setText("");
-						if(turn==1){ 		//ÁøÈ¸»ö ¹ÙÅÁ
-							timeT[c].setBackgroundColor(Color.parseColor("#eeeeee"));  //eeeeee
-						}
-						if(turn==0){			//È¸»ö ¹ÙÅÁ
-							timeT[c].setBackgroundColor(Color.parseColor("#ffffff"));  //ffffff
-						}
-					}
-							
-					else{								// ½Ã°£ ³»¿ë ¿¤¸®¸ÕÆ®µµ ¾Æ´Ï°í ¼ö¾÷ÀÌ ¾ø¾î¼­ ºóÄ­ÀÎ ¿¤¸®¸ÕÆ®µµ ¾Æ´Ñ ¼ö¾÷ÀÖ´Â ¿¤¸®¸ÕÆ®µé
-						Log.d("textview", "¼ö¾÷");
-						
-						if(set[c].num==1){
-							Log.d("timeTable", set[c].room+set[c].sub);
-							timeT[c].setText(set[c].room+"\n"+set[c].sub);
-						}
-						
-						for(a=0; a<10; a++){
-							if(sr[c].equals(sub[a])){		//sub°ú¸ñ°ú sr°ú¸ñÀÌ ¼­·Î °°À¸¸é sub°ú¸ñ »ö±ò(aÀÎµ¦½º·Î °áÁ¤)·Î ¹è°æ ¹Ù²ñ
-								break;
-							}
-							
-							if(set[c].num == state[a]){  // °ú¸ñÀÌ ÀÖÀ»¶§
-								if(set[c].num2>1 && set[c].num2!=2){  // ¼ö¾÷ÀÌ 3±³½Ã ÀÌ»óÀÏ‹š
-									
-								}
-								if(set[c].num2==2){
-									
-								}
-							}
-						}
-						
-						switch(a){
-						case 0:
-							timeT[c].setBackgroundColor(Color.parseColor("#FFCBCB")); //»¡
-							break;
-						case 1:
-							timeT[c].setBackgroundColor(Color.parseColor("#FFD3B0"));  //ÁÖ
-							break;
-						case 2:
-							timeT[c].setBackgroundColor(Color.parseColor("#D6F0FF")); //ÆÄ
-							break;
-						case 3:
-							timeT[c].setBackgroundColor(Color.parseColor("#FFFFA1")); //³ë
-							break;
-						case 4:
-							timeT[c].setBackgroundColor(Color.parseColor("#F5D6FF")); //º¸
-							break;
-						case 5:
-							timeT[c].setBackgroundColor(Color.parseColor("#BCFFB5")); //ÃÊ
-							break;
-						case 6:
-							timeT[c].setBackgroundColor(Color.parseColor("#D6FFFF")); //ÇÏ´Ã
-							break;
-						case 7:
-							timeT[c].setBackgroundColor(Color.parseColor("#E8D9FF"));  //¿¬º¸
-							break;
-						case 8:
-							timeT[c].setBackgroundColor(Color.parseColor("#D8D8D8"));  //È¸
-							break;
-						case 9:
-							timeT[c].setBackgroundColor(Color.parseColor("#FFD6FF")); //ºĞÈ«
-							break;
-						}
-					}
-				}
-			}
-		}
-	};
-	
-	public void save(View v) 
-	{ 		// ÀúÀå´©¸£¸é Åä½ºÆ®·Î ÀúÀåÇÒ²¨³Ä°í ÇÏ³ª¸¸ µÈ´Ù°í ¶ç¿öÁÖ°í ÀúÀå
+                    s.nextToken(">");
+                    s.nextToken(">");
+                    sr[tb_num]=s.nextToken("<");			//ê³¼ëª© ì´ë¦„ ìë¦„
+                    sr[tb_num]=sr[tb_num].substring(1);
+
+                    set[tb_num].sub = sr[tb_num].trim();  //trim >> ìŠ¤íŠ¸ë§ì— ì–‘ìª½ ë ê³µë°± ì˜ë¼ë‚´ëŠ”ê²ƒ
+
+                    for(int a=0; a<10 ;a++){		//ë¦¬ìŠ¤íŠ¸ì— ê³¼ëª©ë¥¼ì„ ë„£ëŠ”ë‹¤
+                        if(sub[a]==null){
+                            sub[a]=sr[tb_num].trim();  //ë¹ˆê³µê°„ ì œê±°í•´ì„œ ì €ì¥
+                            set[tb_num].num=1;
+                            break;
+                        }
+                        else if(sub[a].equals(set[tb_num].sub)){				//ì¤‘ë³µëœê±°ë©´ ë„˜ì–´ê°„ë‹¤.
+                            Log.d("ê°™ë‹¤","ê°™ë‹¤   : "+tb_num);
+
+                            if(tb_num>4 && set[tb_num-5].sub.equals(set[tb_num].sub)){  // ì „ êµì‹œì™€ ê°™ì€ ê³¼ëª©ì¼ë•Œ ìˆœì„œ ì¹´ìš´í„° ++
+                                Log.d("tb_num","ì¤‘ê°„ "+ set[tb_num].sub +" // tb_num : "+tb_num);
+
+                                set[tb_num].num=set[tb_num-5].num+1;
+                                break;
+                            }else{ 			// ì²«ì‹œê°„ ë˜ëŠ”ë†ˆë“¤
+                                Log.d("tb_num","ì²«ì‹œê°„ "+ set[tb_num].sub +" // tb_num : "+tb_num);
+
+                                set[tb_num].num=1;
+                                break;
+                            }
+                        }
+                    }
+
+                    switch(tb_num%5){
+                        case 0:
+                            set[tb_num].day = 1;		// ì›”
+                            break;
+                        case 1:
+                            set[tb_num].day = 2;		// í™”
+                            break;
+                        case 2:
+                            set[tb_num].day = 3;		// ìˆ˜
+                            break;
+                        case 3:
+                            set[tb_num].day = 4;		// ëª©
+                            break;
+                        case 4:
+                            set[tb_num].day = 5;		// ê¸ˆ
+                            break;
+                    }
+
+                    s.nextToken(">");
+                    s.nextToken(">");
+                    set[tb_num].room=s.nextToken("<").substring(1)+sn;	// ê°•ì˜ì‹¤ ìë¦„ +ë¶„ë°˜ ë¶™ì„ (sn)
+
+                    tb_num++;
+                }
+                Log.d("tk","tb_num : "+tb_num);
+            }
+
+            for(int a=0;a<10;a++){
+                if(sub[a]==null){
+                    break;
+                }
+                Log.d("sub",sub[a]);
+
+            }
+
+            Log.d("web","view9");
+
+            backthread thread = new backthread();
+            thread.setDaemon(true);
+            thread.start();							// uiì— ì‹œê°„í‘œ ë„£ëŠ” ìŠ¤ë ˆë“œ ëŒë¦¼
+
+        }
+    }
+
+    class backthread extends Thread{
+        public void run(){
+            mHandler.sendEmptyMessage(0);
+        }
+    }
+
+    Handler mHandler = new Handler(){
+        public void handleMessage(Message mag){
+            if(mag.what==0){
+                int a=0;
+                int turn=0; // 1ì´ë©´ ê³µê°•ë•Œ íšŒìƒ‰ë°”íƒ• 0ì´ë©´ ê³µê°•ë•Œ ì§„íšŒìƒ‰ ë°”íƒ•
+
+                for(int c=0 ; c<90; c++){ 				// ë‹¤ìŒí–‰ìœ¼ë¡œ ë„˜ì–´ê°  ////////cë¥¼ 3ë¶€í„° í•˜ëŠ” ì´ìœ ëŠ” 0ì€ ìš”ì¼ í–‰ì´ê³  1ê³¼2ëŠ” ë³´í†µ ë¹„ì–´ìˆìŒ.
+                    Log.d("thread for",""+c);
+                    timeT[c].setText("");
+
+                    if(c%5==0){		// í•œì¤„ì”© turnë³€ìˆ˜ë¥¼ ë°”ê¿”ì¤Œ
+                        switch(turn){
+                            case 0:
+                                turn = 1;
+                                break;
+                            case 1:
+                                turn = 0;
+                                break;
+                        }
+                    }
+
+                    if(set[c].sub.length()<2){ 				// ìˆ˜ì—…ì´ ì—†ì–´ì„œ ì•„ë¬´ ë‚´ìš© ì—†ëŠ” ì—˜ë¦¬ë¨¼íŠ¸ëŠ” ë¹ˆì¹¸ ë„£ì–´ì¤Œ
+                        Log.d("textview", "ê³µê°•");
+                        //timeT[c].setText("");
+                        if(turn==1){ 		//ì§„íšŒìƒ‰ ë°”íƒ•
+                            timeT[c].setBackgroundColor(Color.parseColor("#eeeeee"));  //eeeeee
+                        }
+                        if(turn==0){			//íšŒìƒ‰ ë°”íƒ•
+                            timeT[c].setBackgroundColor(Color.parseColor("#ffffff"));  //ffffff
+                        }
+                    }
+
+                    else{								// ì‹œê°„ ë‚´ìš© ì—˜ë¦¬ë¨¼íŠ¸ë„ ì•„ë‹ˆê³  ìˆ˜ì—…ì´ ì—†ì–´ì„œ ë¹ˆì¹¸ì¸ ì—˜ë¦¬ë¨¼íŠ¸ë„ ì•„ë‹Œ ìˆ˜ì—…ìˆëŠ” ì—˜ë¦¬ë¨¼íŠ¸ë“¤
+                        Log.d("textview", "ìˆ˜ì—…");
+
+                        if(set[c].num==1){
+                            Log.d("timeTable", set[c].room+set[c].sub);
+                            timeT[c].setText(set[c].room+"\n"+set[c].sub);
+                        }
+
+                        for(a=0; a<10; a++){
+                            if(sr[c].equals(sub[a])){		//subê³¼ëª©ê³¼ srê³¼ëª©ì´ ì„œë¡œ ê°™ìœ¼ë©´ subê³¼ëª© ìƒ‰ê¹”(aì¸ë±ìŠ¤ë¡œ ê²°ì •)ë¡œ ë°°ê²½ ë°”ë€œ
+                                break;
+                            }
+
+                            if(set[c].num == state[a]){  // ê³¼ëª©ì´ ìˆì„ë•Œ
+                                if(set[c].num2>1 && set[c].num2!=2){  // ìˆ˜ì—…ì´ 3êµì‹œ ì´ìƒì¼Â‹Âš
+
+                                }
+                                if(set[c].num2==2){
+
+                                }
+                            }
+                        }
+
+                        switch(a){
+                            case 0:
+                                timeT[c].setBackgroundColor(Color.parseColor("#FFCBCB")); //ë¹¨
+                                break;
+                            case 1:
+                                timeT[c].setBackgroundColor(Color.parseColor("#FFD3B0"));  //ì£¼
+                                break;
+                            case 2:
+                                timeT[c].setBackgroundColor(Color.parseColor("#D6F0FF")); //íŒŒ
+                                break;
+                            case 3:
+                                timeT[c].setBackgroundColor(Color.parseColor("#FFFFA1")); //ë…¸
+                                break;
+                            case 4:
+                                timeT[c].setBackgroundColor(Color.parseColor("#F5D6FF")); //ë³´
+                                break;
+                            case 5:
+                                timeT[c].setBackgroundColor(Color.parseColor("#BCFFB5")); //ì´ˆ
+                                break;
+                            case 6:
+                                timeT[c].setBackgroundColor(Color.parseColor("#D6FFFF")); //í•˜ëŠ˜
+                                break;
+                            case 7:
+                                timeT[c].setBackgroundColor(Color.parseColor("#E8D9FF"));  //ì—°ë³´
+                                break;
+                            case 8:
+                                timeT[c].setBackgroundColor(Color.parseColor("#D8D8D8"));  //íšŒ
+                                break;
+                            case 9:
+                                timeT[c].setBackgroundColor(Color.parseColor("#FFD6FF")); //ë¶„í™
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    public void save(View v)
+    { 		// ì €ì¥ëˆ„ë¥´ë©´ í† ìŠ¤íŠ¸ë¡œ ì €ì¥í• êº¼ëƒê³  í•˜ë‚˜ë§Œ ëœë‹¤ê³  ë„ì›Œì£¼ê³  ì €ì¥
 //		if(mWebView.getUrl()!="http://student.donga.ac.kr/Univ/SUE/SSUE0020.aspx?m=3" ){
 //		}
-		
-	}
-	
-	public void opem(View v) 
-	{	// ¿ÀÇÂ ´©¸£¸é ÆÄÀÏ ÀÖ³ª È®ÀÎÇÏ°í ÀÖÀ¸¸é ÀĞ¾î¿Í¼­ ¹Ù·Î ½Ã°£Ç¥ ¶ç¿öÁÜ  ¾øÀ¸¸é ÆÄÀÏ ¾ø´Ù°í Åä½ºÆ®.
-		
-	}
-	
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.timet, menu);
-		return true;
-	}
+
+    }
+
+    public void opem(View v)
+    {	// ì˜¤í”ˆ ëˆ„ë¥´ë©´ íŒŒì¼ ìˆë‚˜ í™•ì¸í•˜ê³  ìˆìœ¼ë©´ ì½ì–´ì™€ì„œ ë°”ë¡œ ì‹œê°„í‘œ ë„ì›Œì¤Œ  ì—†ìœ¼ë©´ íŒŒì¼ ì—†ë‹¤ê³  í† ìŠ¤íŠ¸.
+
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.timet, menu);
+        return true;
+    }
 }
