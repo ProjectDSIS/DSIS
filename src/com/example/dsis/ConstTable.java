@@ -22,6 +22,6 @@ public class ConstTable {
         public static final String SKY_BLUE = "#D6FFFF";
         public static final String LIGHT_PULPLE = "E8D9FF";
         public static final String GRAY = "#D8D8D8";
-        public static final String PINK = "FFD6FF";
+        public static final String PINK = "#FFD6FF";
     }
 }
