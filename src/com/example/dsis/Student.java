@@ -52,7 +52,7 @@ public class Student extends Activity {
 
         for(int i =0; i<text.length; i++)
         {
-            int id = getResources().getIdentifier("text"+(i+1), "id", "com.example.dsis");
+            int id = getResources().getIdentifier("text"+(i), "id", "com.example.dsis");
             text[i] = (TextView) findViewById(id);
         }
 
