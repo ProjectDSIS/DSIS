@@ -53,35 +53,36 @@ public class LibActivity extends Activity {
         getMenuInflater().inflate(R.menu.lib, menu);
         return true;
     }
+    
+    private void showActivity(int _code)
+    {
+    	itt.putExtra("code", _code);
+    	startActivityForResult(itt, 0);
+    }
 
     public void ck_st4(View v) // 4층 그룹스터디
     {
-        itt.putExtra("code", 1);
-        startActivityForResult(itt, 0);
+    	showActivity(1);
     }
 
     public void ck_st5a(View v) // 5층 A
     {
-        itt.putExtra("code", 2);
-        startActivityForResult(itt, 0);
+    	showActivity(2);
     }
 
     public void ck_st5b(View v) // 5층 B
     {
-        itt.putExtra("code", 3);
-        startActivityForResult(itt, 0);
+    	showActivity(3);
     }
 
     public void ck_st5c(View v) // 5층 C
     {
-        itt.putExtra("code", 4);
-        startActivityForResult(itt, 0);
+    	showActivity(4);
     }
 
     public void ck_st5d(View v) // 5층 D
     {
-        itt.putExtra("code", 5);
-        startActivityForResult(itt, 0);
+    	showActivity(5);
     }
 
 }

@@ -79,7 +79,7 @@ public class TimetActivity extends Activity {
         Log.d("web","view2");
 
         for(int i = 0; i<timeT.length; i++){
-            int id = getResources().getIdentifier("time"+(i/5+1)+"_"+(i+1), "id", "com.example.dsis");
+            int id = getResources().getIdentifier("time"+(i/5+1)+"_"+(i%5+1), "id", "com.example.dsis");
             timeT[i] = (TextView) findViewById(id);
         }
 
