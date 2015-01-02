@@ -81,7 +81,7 @@ public class Student extends Activity {
                 Log.d("학적부", "체크2");
             }
         });
-
+        int a;
         Log.d("학적부", "체크3");
         mWebView.loadUrl("https://student.donga.ac.kr/Univ/SUD/SSUD0000.aspx?m=1");
         Log.d("학적부", "체크4");
