@@ -99,7 +99,7 @@ public class DongAWebClient {
 	
 	public String getHtml(String _html){
 		if(this.isLoginSuccess){
-			post = new HttpPost("_html");
+			post = new HttpPost(_html);
 			try {
 				res = client.execute(post);
 				String resString = EntityUtils.toString(res.getEntity(),HTTP.UTF_8);
