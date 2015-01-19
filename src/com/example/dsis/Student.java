@@ -1,13 +1,22 @@
 package com.example.dsis;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.StringTokenizer;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.example.dsis.TimetActivity.MyJavaScriptInterface;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,65 +38,31 @@ public class Student extends Activity {
     WebSettings Wset;
     public TextView[] text;
     String[] str;
+    DongAWebClient client;
+    
+    String source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student);
+        
+        this.client = DongAWebClient.getInstance();
 
         text = new TextView[24];
         str = new String[30];
 
-        picWebView = (WebView) findViewById(R.id.picture);
-        picWebView.setWebViewClient(new WebViewClient());
-
-        mWebView = (WebView) findViewById(R.id.webView1); // 웹뷰와 xml 간 연동
-        mWebView.setWebViewClient(new WebViewClient());
         Log.d("web","view1");
-
-        Wset = mWebView.getSettings();
-        Wset.setJavaScriptEnabled(true); // 자바스크립트 허용
-        mWebView.setHorizontalScrollBarEnabled(false); //가로 스크롤
-        mWebView.setVerticalScrollBarEnabled(false);
 
         for(int i =0; i<text.length; i++)
         {
             int id = getResources().getIdentifier("text"+(i), "id", "com.example.dsis");
             text[i] = (TextView) findViewById(id);
         }
-
-        MyJavaScriptInterface inter=new MyJavaScriptInterface(this);
-        mWebView.addJavascriptInterface(inter,"HtmlViewer");
-		
-		/*
-		mWebView.setOnTouchListener(new View.OnTouchListener() {	// 터치 리스너로 무빙 터치 발생 시 스크롤 없게
-		    public boolean onTouch(View v, MotionEvent event) {
-		      return (event.getAction() == MotionEvent.ACTION_MOVE);
-		    }
-		  });
-		*/
-
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view,
-                                           SslErrorHandler handler, SslError error) {
-                handler.proceed(); // SSL 에러가 발생해도 계속 진행!
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                mWebView.loadUrl("javascript:window.HtmlViewer.showHTML"
-                        + "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
-                Log.d("학적부", "체크2");
-            }
-        });
-        int a;
-        Log.d("학적부", "체크3");
-        mWebView.loadUrl("https://student.donga.ac.kr/Univ/SUD/SSUD0000.aspx?m=1");
-        Log.d("학적부", "체크4");
-        picWebView.loadUrl("https://student.donga.ac.kr/Univ/SUD/SSUD0022.aspx");
+        
+        new ProcessSetData().execute(null,null,null);
     }
-
+ 
 
     class MyJavaScriptInterface {
         private Student activity;
@@ -106,6 +81,7 @@ public class Student extends Activity {
             mWebView.scrollTo(500,550);
             Document doc = null;
             doc = Jsoup.parse(html);
+            doc = new Document(new String("asd"));
             Elements rows1 = doc.select("#Table4 td");  			//id가 Table4 인 테이블의 td를 긁어옴
             Elements rows2 = doc.select("#Table5 td");  			//id가 Table5 인 테이블의 td를 긁어옴
             Elements rows3 = doc.select("#Table7 td");  			//id가 Table7 인 테이블의 td를 긁어옴
@@ -174,14 +150,30 @@ public class Student extends Activity {
 
             Log.d("학적부", "체크6 - 스트링 잘라내기 완료");
 
-            backthread thread = new backthread();
-            thread.setDaemon(true);
-            thread.start();							// ui에 시간표 넣는 스레드 돌림
+            
+           						// ui에 시간표 넣는 스레드 돌림
 
             Log.d("학적부", "thread start");
         }
     }
-
+    
+    
+    private class ProcessSetData extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			 if(!client.getIsLogin()){
+             	Log.e("로그인안됨", "non-login");
+             	return null;
+             }
+             
+             source = client.getHtml(ConstTable.URL.STUDENT_INFO);
+             backthread thread = new backthread();
+             thread.setDaemon(true);
+             thread.start();
+			return null;
+		}
+	}
 
 
 
@@ -197,9 +189,95 @@ public class Student extends Activity {
         public void handleMessage(Message mag){
             if(mag.what==0){
                 Log.d("학적부", "체크8 - 핸들러 사용");
-                mWebView.scrollTo(500,550);
+                //mWebView.scrollTo(500,550);
                 Log.d("학적부", "화면고정");
+               
+                
+                int a;
+                int i;
+                String sk;
+                
+                a=0;
+                i=0;
+                //mWebView.scrollTo(500,550);
 
+                Document doc = null;
+        		doc = Jsoup.parse(source);
+
+                //doc = new Document(new String("asd"));
+                Elements rows1 = doc.select("#Table4 td");  			//id가 Table4 인 테이블의 td를 긁어옴
+                Elements rows2 = doc.select("#Table5 td");  			//id가 Table5 인 테이블의 td를 긁어옴
+                Elements rows3 = doc.select("#Table7 td");  			//id가 Table7 인 테이블의 td를 긁어옴
+
+                Log.d("학적부", "체크5 - elements입력완료");
+
+                //a=rows1.size();
+
+                for(int e=0; e<27 ; e++){
+                    if(e==1 || e==2){  // 학번 이름
+                        sk= rows1.get(e).toString();
+                        StringTokenizer s0 = new StringTokenizer(sk);
+
+                        s0.nextToken(">");
+                        s0.nextToken(">");
+                        if(e==2){
+                            str[0]=str[0]+"  "+s0.nextToken("<").substring(1);
+                            //i++;
+                        }
+                        else{
+                            str[0]=" "+s0.nextToken("<").substring(1);
+                        }
+
+                        continue;
+                    }
+                    if(e%2==0){
+                        sk= rows1.get(e).toString();
+                        StringTokenizer s0 = new StringTokenizer(sk);
+
+                        s0.nextToken(">");
+                        s0.nextToken(">");
+                        str[i]=" "+s0.nextToken("<").substring(1);
+                        i++;
+                    }
+                }
+
+                //a=rows2.size();
+                //i--;
+                for(int e=0; e<18 ; e++){
+                    if(e%2==1){
+                        sk= rows2.get(e).toString();
+                        StringTokenizer s0 = new StringTokenizer(sk);
+
+                        s0.nextToken(">");
+                        s0.nextToken(">");
+                        str[i]=" "+s0.nextToken("<").substring(1);
+                        i++;
+                    }
+
+                }
+
+                //a=rows3.size();
+
+                for(int e=26; e<29 ; e++){
+                    if(e%2==0){
+                        sk= rows3.get(e).toString();
+                        StringTokenizer s0 = new StringTokenizer(sk);
+
+
+                        s0.nextToken(">");
+                        s0.nextToken(">");
+                        str[i]=" "+s0.nextToken("<").substring(1);
+                        i++;
+                    }
+                }
+
+                Log.d("학적부", "체크6 - 스트링 잘라내기 완료");
+
+        							// ui에 시간표 넣는 스레드 돌림
+
+                Log.d("학적부", "thread start");
+                
+                
                 for(int e=0; e<24 ; e++){
                     if(str[e].length()<2){
                         text[e].setText(" -");
@@ -213,7 +291,9 @@ public class Student extends Activity {
         }
     };
 
-
+    private void parseHTML(String _source){
+    	
+    }
 
 
     @Override

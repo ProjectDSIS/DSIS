@@ -56,20 +56,20 @@ public class ScholarshipActivity extends Activity {
 			text[a] = (TextView) findViewById(id);
 		}
 
-		mWebView = (WebView) findViewById(R.id.wv); // À¥ºä¿Í xml °£ ¿¬µ¿
+		mWebView = (WebView) findViewById(R.id.wv); // ï¿½ï¿½ï¿½ï¿½ï¿½ xml ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		mWebView.setWebViewClient(new WebViewClient());
 
 		Wset = mWebView.getSettings();
-		Wset.setJavaScriptEnabled(true); // ÀÚ¹Ù½ºÅ©¸³Æ® Çã¿ë
-		mWebView.setHorizontalScrollBarEnabled(false); // °¡·Î ½ºÅ©·Ñ
+		Wset.setJavaScriptEnabled(true); // ï¿½Ú¹Ù½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
+		mWebView.setHorizontalScrollBarEnabled(false); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½
 		mWebView.setVerticalScrollBarEnabled(false);
 
 		MyJavaScriptInterface inter = new MyJavaScriptInterface(this);
 		mWebView.addJavascriptInterface(inter, "HtmlViewer");
 
-		mWebView.setOnTouchListener(new View.OnTouchListener() { // ÅÍÄ¡ ¸®½º³Ê·Î ¹«ºù
-																	// ÅÍÄ¡ ¹ß»ý ½Ã
-																	// ½ºÅ©·Ñ ¾ø°Ô
+		mWebView.setOnTouchListener(new View.OnTouchListener() { // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ ï¿½ï¿½ï¿½ï¿½
+																	// ï¿½ï¿½Ä¡ ï¿½ß»ï¿½ ï¿½ï¿½
+																	// ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			public boolean onTouch(View v, MotionEvent event) {
 				return (event.getAction() == MotionEvent.ACTION_MOVE);
 			}
@@ -79,7 +79,7 @@ public class ScholarshipActivity extends Activity {
 			@Override
 			public void onReceivedSslError(WebView view,
 					SslErrorHandler handler, SslError error) {
-				handler.proceed(); // SSL ¿¡·¯°¡ ¹ß»ýÇØµµ °è¼Ó ÁøÇà!
+				handler.proceed(); // SSL ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Øµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!
 			}
 
 			@Override
@@ -111,10 +111,10 @@ public class ScholarshipActivity extends Activity {
 
 			data = new String[5];
 
-			rows1 = doc.select("#Table1 td"); // ÇÐ»ý Á¤º¸
-			rows2 = doc.select("#Table8 td"); // ÀåÇÐ³»¿ë
+			rows1 = doc.select("#Table1 td"); // ï¿½Ð»ï¿½ ï¿½ï¿½ï¿½ï¿½
+			rows2 = doc.select("#Table8 td"); // ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½
 
-			for (int a = 1, b = 0; a < 14; a++) { // ÇÐ»ýÁ¤º¸ ÃßÃ¶
+			for (int a = 1, b = 0; a < 14; a++) { // ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¶
 				if (a % 2 == 1) {
 					sk = rows1.get(a).toString();
 					StringTokenizer s = new StringTokenizer(sk);
@@ -125,12 +125,12 @@ public class ScholarshipActivity extends Activity {
 				}
 			}
 			
-			temp = new Schol_cus_View("ÇÐ³âµµ/ÇÐ±â", "ÀåÇÐ¸í", "¼öÇýÀÏÀÚ", "±¸ºÐ", "±Ý¾×");
+			temp = new Schol_cus_View("ï¿½Ð³âµµ/ï¿½Ð±ï¿½", "ï¿½ï¿½ï¿½Ð¸ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½Ý¾ï¿½");
 			data_list.add(temp);
 
 			for (int a = 7, institution = 12, b = 0; a < rows2.size(); a++) {
 				
-				if(a != institution) { // (0(³âµµ) 1(ÇÐ±â)) 2(±¸ºÐ) 3(ÀåÇÐ¸í) 4(¼öÇýÀÏÀÚ) 6(±Ý¾×)
+				if(a != institution) { // (0(ï¿½âµµ) 1(ï¿½Ð±ï¿½)) 2(ï¿½ï¿½ï¿½ï¿½) 3(ï¿½ï¿½ï¿½Ð¸ï¿½) 4(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) 6(ï¿½Ý¾ï¿½)
 					sk = rows2.get(a).toString();
 					StringTokenizer s = new StringTokenizer(sk);
 					s.nextToken(">").substring(1);
@@ -143,7 +143,7 @@ public class ScholarshipActivity extends Activity {
 						temp = new Schol_cus_View("","","",data[0],data[1]);
 						data_list.add(temp);
 					}else if (a % 7 == 1) {
-						data[b - 1] += "-" + s.nextToken("&").substring(1); // 0 ³âµµ-ÇÐ±â  , 1 ±¸ºÐ , 2 ÀåÇÐ¸í , 3 ¼öÇýÀÏÀÚ , 4 ±Ý¾×
+						data[b - 1] += "-" + s.nextToken("&").substring(1); // 0 ï¿½âµµ-ï¿½Ð±ï¿½  , 1 ï¿½ï¿½ï¿½ï¿½ , 2 ï¿½ï¿½ï¿½Ð¸ï¿½ , 3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ , 4 ï¿½Ý¾ï¿½
 					}else{
 						data[b] = s.nextToken("&").substring(1);
 						b++;
@@ -155,7 +155,7 @@ public class ScholarshipActivity extends Activity {
 								data[1], data[4]);
 						data_list.add(temp);
 					}
-				}else			// 5(ÀåÇÐ±â°ü) »ý·« À§ÇÔ
+				}else			// 5(ï¿½ï¿½ï¿½Ð±ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					institution += 7;
 			}
 
@@ -164,7 +164,7 @@ public class ScholarshipActivity extends Activity {
 
 			backthread thread = new backthread();
 			thread.setDaemon(true);
-			thread.start(); // ui¿¡ ½Ã°£Ç¥ ³Ö´Â ½º·¹µå µ¹¸²
+			thread.start(); // uiï¿½ï¿½ ï¿½Ã°ï¿½Ç¥ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			thread.stop();
 			thread.destroy();
 		}
@@ -180,7 +180,7 @@ public class ScholarshipActivity extends Activity {
 		public void handleMessage(Message mag) {
 			if (mag.what == 0) {
 				listview.setAdapter(customAdapter);
-				for (int a = 0; a < 7; a++) { // ÇÐ»ýÁ¤º¸ ÃßÃ¶
+				for (int a = 0; a < 7; a++) { // ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¶
 					text[a].setText(student_inf[a]);
 				}
 			}
@@ -190,7 +190,7 @@ public class ScholarshipActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.scholarship, menu);
+		//getMenuInflater().inflate(R.menu.scholarship, menu);
 		return true;
 	}
 }

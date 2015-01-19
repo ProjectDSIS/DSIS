@@ -41,6 +41,6 @@ public class ConstTable {
     public static class URL{
     	public static final String LOG_IN = "http://student.donga.ac.kr/Login.aspx";
     	public static final String TIME_TABLE = "";
-    	public static final String STUDENT_INFO = "";
+    	public static final String STUDENT_INFO = "https://student.donga.ac.kr/Univ/SUD/SSUD0000.aspx?m=1";
     }
 }
